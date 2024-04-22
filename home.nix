@@ -17,6 +17,9 @@ in {
   # TODO please change the username & home directory to your own
    home.username = "pmyjavec";
    home.homeDirectory = "/home/pmyjavec";
+   home.shellAliases = { 
+     cat = "bat";
+   };
 
    home.sessionVariables = {
      LANG = "en_US.UTF-8";
