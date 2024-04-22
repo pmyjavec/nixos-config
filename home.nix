@@ -128,6 +128,9 @@ in {
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # Coding tools
+    devbox
   ];
 
   # basic configuration of git, please change to your own
