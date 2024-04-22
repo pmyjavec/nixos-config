@@ -162,6 +162,7 @@ in {
       plugins = [
         "git"
   	"sudo"
+	"vi-mode"
       ];
     };
     loginExtra = ''
