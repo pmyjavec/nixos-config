@@ -21,7 +21,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 	    #TODO(pmyjavec), workout how to move this to the users dir
-            home-manager.users.pmyjavec = ../pmyjavec.nix;
+            home-manager.users.pmyjavec = ./../users/pmyjavec/pmyjavec.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
