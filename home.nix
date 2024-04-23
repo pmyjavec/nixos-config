@@ -43,6 +43,10 @@ in {
   #   executable = true;  # make all files executable
   # };
 
+  xdg.configFile = {
+    "i3/config".text = builtins.readFile ./users/pmyjavec/dotfiles/i3;
+  };
+
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
   #     xxx
@@ -165,11 +169,6 @@ in {
 	"vi-mode"
       ];
     };
-    loginExtra = ''
-      if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
-          exec sway
-      fi
-    '';
   };
 
   programs.bash.enable = true;
@@ -201,46 +200,6 @@ in {
   #programs.gpg.scdaemonSettings = { 
   #  disable-ccid = true;
   #};
-
-  wayland.windowManager.sway = {
-    enable = true;
-    config = rec {
-      modifier = "Mod4";
-      # Use kitty as default terminal
-      terminal = "${pkgs.wezterm}/bin/wezterm";
-      startup = [
-        # Launch Firefox on start
-        {command = "firefox";}
-      ];
-
-      output = {
-            "Virtual-1" = { position = "0,0"; scale = "2.0"; };
-      };
-
-      fonts = {
-  	names = [ "Iosevka" ];
-  	style = "Normal";
-  	size = 12.0;
-     };
-
-
-    };
-
-    extraConfig = ''
-      default_border none 
-    '';
-
-    #TODO(pmyjavec)
-    extraSessionCommands = ''
-      export XDG_SESSION_TYPE=wayland
-      export XDG_CURRENT_DESKTOP=sway
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      export QT_AUTO_SCREEN_SCALE_FACTOR=0
-      export QT_SCALE_FACTOR=1
-      export GDK_SCALE=1
-      export GDK_DPI_SCALE=1
-    '';
-  };
 
   # Find and manage installed fonts from packages.
   fonts.fontconfig.enable = true;
