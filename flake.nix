@@ -20,7 +20,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.pmyjavec #= import ./pmyjavec/home.nix;
+            #home-manager.users.pmyjavec = ./;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
