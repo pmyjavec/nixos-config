@@ -1,3 +1,4 @@
+# Home manager config 
 { config, pkgs, ... }:
 
 let
@@ -28,9 +29,6 @@ in {
      EDITOR = "nvim";
      PAGER = "less -FirSwX";
      MANPAGER = "${manpager}/bin/manpager";
-
-     # Required to get Sway working in a VM
-     WLR_NO_HARDWARE_CURSORS="1";
    };
 
   # link the configuration file in current directory to the specified location in home directory
@@ -43,9 +41,14 @@ in {
   #   executable = true;  # make all files executable
   # };
 
+  # Whether to enable management of XDG base directories.
+  xdg.enable = true;
+
   xdg.configFile = {
     "i3/config".text = builtins.readFile ./users/pmyjavec/dotfiles/i3;
   };
+
+  xresources.extraConfig = builtins.readFile ./users/pmyjavec/dotfiles/Xresources;	
 
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
@@ -220,7 +223,7 @@ in {
       config.enable_scroll_bar = true
       config.enable_wayland = true 
       config.font = wezterm.font 'FiraCode Nerd Font Mono Ret'
-      config.font_size = 12.0
+      config.font_size = 14.0
       config.hide_mouse_cursor_when_typing = true
       config.inactive_pane_hsb = {
         saturation = 0.6,
@@ -247,4 +250,11 @@ in {
     '';
   };
 
+  # Make cursor not tiny on HiDPI screens
+  home.pointerCursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+    x11.enable = true;
+  };
 }

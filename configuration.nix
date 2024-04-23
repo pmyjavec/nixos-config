@@ -46,11 +46,13 @@
     name = "pmyjavec";
     home = "/home/pmyjavec";
     isNormalUser = true;
-    extraGroups = [ "docker" "wheel" ];
+    extraGroups = [ "wheel" ];
     group = "pmyjavec";
     shell = pkgs.zsh;
     hashedPassword = "$y$j9T$gKBywVHsXk90f0R8W5nQD0$1EXQ/5al7Mq.UkI.RKdQuFWwPRG3AiOpJoML7WmExc0";
   };
+
+  users.groups.pmyjavec = {};
 
   security.polkit.enable = true;
 
