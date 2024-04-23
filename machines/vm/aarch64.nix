@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }: {
   # Setup qemu so we can run x86_64 binaries
+
+  imports = [
+    ../../../modules/vmware-guest.nix
+  ];
+
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
 
   # Disable the default module and import our override. We have
