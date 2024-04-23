@@ -13,13 +13,14 @@
         system = "aarch64-linux";
         modules = [
           ./configuration.nix
-          ./aarch64.nix
+          ./machines/vm/aarch64.nix
+          ./graphical.nix
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.pmyjavec = import ./home.nix;
+            home-manager.users.pmyjavec = import ./users/pmyjavec/home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
