@@ -28,6 +28,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+	    home-manager.sharedModules = [
+	      nixvim.homeManagerModules.nixvim
+	    ];
 	    #TODO(pmyjavec), workout how to move this to the users dir
             home-manager.users.pmyjavec = ./pmyjavec.nix;
           }

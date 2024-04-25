@@ -3,15 +3,7 @@
 
 let
   sources = import ../../nix/sources.nix;
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-    ref = "nixos-23.11";
-  });
 in {
-   imports = [
-     # For home-manager
-     nixvim.homeManagerModules.nixvim
-   ];
    # TODO please change the username & home directory to your own
    home.username = "pmyjavec";
    home.homeDirectory = "/home/pmyjavec";
