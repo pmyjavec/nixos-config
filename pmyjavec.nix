@@ -8,14 +8,14 @@ in {
    home.homeDirectory = "/home/pmyjavec";
    home.shellAliases = { 
      cat = "bat";
+     man = "batman";
+     diff = "batdiff";
    };
 
    home.sessionVariables = {
      LANG = "en_US.UTF-8";
      LC_CTYPE = "en_US.UTF-8";
      LC_ALL = "en_US.UTF-8";
-     EDITOR = "nvim";
-     PAGER = "less -FirSwX";
    };
 
   # link the configuration file in current directory to the specified location in home directory
@@ -165,6 +165,10 @@ in {
       key = "1C8A0D94F1C4F794";
       signByDefault = true;
     };
+
+    delta = {
+      enable = true;
+    };
     
   };
 
@@ -238,8 +242,9 @@ in {
 
       config.audible_bell = 'Disabled'
       config.color_scheme = 'Tokyo Night Storm'
-      config.enable_scroll_bar = true
-      config.enable_wayland = true 
+      config.enable_scroll_bar = false
+      config.enable_wayland = false
+      config.enable_tab_bar = false
       config.font = wezterm.font 'FiraCode Nerd Font Mono Ret'
       config.font_size = 9.0
       config.hide_mouse_cursor_when_typing = true
@@ -264,6 +269,8 @@ in {
          visual_bell = '#202020',
        } 
 
+       config.term = 'wezterm'
+
       return config
     '';
   };
@@ -278,6 +285,7 @@ in {
 
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
 
     extraConfigLua = builtins.readFile ./users/pmyjavec/dotfiles/nvim.lua;	
     
@@ -292,6 +300,29 @@ in {
     plugins.treesitter.enable = true;
     plugins.lualine.enable = true;
     plugins.which-key.enable = true;
+  };
 
+  programs.bat = {
+    enable = true;
+
+    config = {
+      pager = "less -FR";
+      theme = "tokyonight";
+    }; 
+
+    themes = {
+      tokyonight = {
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim"; # Bat uses sublime syntax for its themes
+          rev = "main";
+          sha256 = "vUEPbgDen3ubcyJZdWCgnChOo1T0LFvZI++8RgGGx1Y=";
+        };
+
+        file = "extras/sublime/tokyonight_storm.tmTheme";
+      };
+    };
+
+    extraPackages = with pkgs.bat-extras; [ batdiff batman ];
   };
 }
