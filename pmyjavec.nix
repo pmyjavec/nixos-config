@@ -1,4 +1,3 @@
-# Home manager config 
 { config, pkgs, ... }:
 
 let
@@ -279,6 +278,8 @@ in {
 
   programs.nixvim = {
     enable = true;
+
+    extraConfigLua = builtins.readFile ./users/pmyjavec/dotfiles/nvim.lua;	
     
     colorschemes.tokyonight = {
       enable = true;
@@ -286,6 +287,11 @@ in {
     };
 
     plugins.telescope.enable = true;
+    plugins.lsp.enable = true;
+    plugins.gitsigns.enable = true;
+    plugins.treesitter.enable = true;
+    plugins.lualine.enable = true;
+    plugins.which-key.enable = true;
 
   };
 }
