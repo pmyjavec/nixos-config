@@ -1,20 +1,10 @@
+# Home manager config 
 { config, pkgs, ... }:
 
 let
   sources = import ../../nix/sources.nix;
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-
-  # For our MANPAGER env var
-  # https://github.com/sharkdp/bat/issues/1145
-  manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
-    sh -c 'col -bx | bat -l man -p'
-    '' else ''
-    cat "$1" | col -bx | bat --language man --style plain
-  ''));
 in {
-
-  # TODO please change the username & home directory to your own
+   # TODO please change the username & home directory to your own
    home.username = "pmyjavec";
    home.homeDirectory = "/home/pmyjavec";
    home.shellAliases = { 
@@ -27,10 +17,6 @@ in {
      LC_ALL = "en_US.UTF-8";
      EDITOR = "nvim";
      PAGER = "less -FirSwX";
-     MANPAGER = "${manpager}/bin/manpager";
-
-     # Required to get Sway working in a VM
-     WLR_NO_HARDWARE_CURSORS="1";
    };
 
   # link the configuration file in current directory to the specified location in home directory
@@ -42,6 +28,32 @@ in {
   #   recursive = true;   # link recursively
   #   executable = true;  # make all files executable
   # };
+
+  # Whether to enable management of XDG base directories.
+  xdg.enable = true;
+
+  xdg.configFile = {
+    "i3/config".text = builtins.readFile ./users/pmyjavec/dotfiles/i3;
+  };
+
+  xresources.extraConfig = builtins.readFile ./users/pmyjavec/dotfiles/Xresources;	
+
+  programs.i3status = {
+    enable = true;
+
+    general = {
+      colors = true;
+      color_good = "#8C9440";
+      color_bad = "#A54242";
+      color_degraded = "#DE935F";
+    };
+
+    modules = {
+      ipv6.enable = false;
+      "wireless _first_".enable = false;
+      "battery all".enable = false;
+    };
+  };
 
   # encode the file content in nix configuration file directly
   # home.file.".xxx".text = ''
@@ -61,13 +73,6 @@ in {
     xz
     unzip
     p7zip
-
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    # yq-go # yaml processor https://github.com/mikefarah/yq
-    # eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
 
     # networking tools
     mtr # A network diagnostic tool
@@ -134,13 +139,34 @@ in {
 
     # Coding tools
     devbox
+    nodejs
+    # The following are specifically required for AstroNvim
+    # even though things like fzf are just nice to have.
+    # If I remove astronvim, I might not required somne of these
+    # packages. 
+    lazygit
+    fzf
+    # utils
+    ripgrep # recursively searches directories for a regex pattern
+    jq # A lightweight and flexible command-line JSON processor
+    # yq-go # yaml processor https://github.com/mikefarah/yq
+    eza # A modern replacement for ‘ls’
+    tree-sitter
   ];
 
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     userName = "Paul Myjavec";
-    userEmail = "paul@myjavec.com";
+    userEmail = "pauly@myjavec.com";
+
+    # gpg --list-secret-keys --keyid-format=long will give us the "key"
+    # value.
+    signing = {
+      key = "1C8A0D94F1C4F794";
+      signByDefault = true;
+    };
+    
   };
 
   # starship - an customizable prompt for any shell
@@ -165,11 +191,6 @@ in {
 	"vi-mode"
       ];
     };
-    loginExtra = ''
-      if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
-          exec sway
-      fi
-    '';
   };
 
   programs.bash.enable = true;
@@ -202,46 +223,6 @@ in {
   #  disable-ccid = true;
   #};
 
-  wayland.windowManager.sway = {
-    enable = true;
-    config = rec {
-      modifier = "Mod4";
-      # Use kitty as default terminal
-      terminal = "${pkgs.wezterm}/bin/wezterm";
-      startup = [
-        # Launch Firefox on start
-        {command = "firefox";}
-      ];
-
-      output = {
-            "Virtual-1" = { position = "0,0"; scale = "2.0"; };
-      };
-
-      fonts = {
-  	names = [ "Iosevka" ];
-  	style = "Normal";
-  	size = 12.0;
-     };
-
-
-    };
-
-    extraConfig = ''
-      default_border none 
-    '';
-
-    #TODO(pmyjavec)
-    extraSessionCommands = ''
-      export XDG_SESSION_TYPE=wayland
-      export XDG_CURRENT_DESKTOP=sway
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      export QT_AUTO_SCREEN_SCALE_FACTOR=0
-      export QT_SCALE_FACTOR=1
-      export GDK_SCALE=1
-      export GDK_DPI_SCALE=1
-    '';
-  };
-
   # Find and manage installed fonts from packages.
   fonts.fontconfig.enable = true;
 
@@ -261,7 +242,7 @@ in {
       config.enable_scroll_bar = true
       config.enable_wayland = true 
       config.font = wezterm.font 'FiraCode Nerd Font Mono Ret'
-      config.font_size = 12.0
+      config.font_size = 9.0
       config.hide_mouse_cursor_when_typing = true
       config.inactive_pane_hsb = {
         saturation = 0.6,
@@ -288,4 +269,23 @@ in {
     '';
   };
 
+  # Make cursor not tiny on HiDPI screens
+  home.pointerCursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+    x11.enable = true;
+  };
+
+  programs.nixvim = {
+    enable = true;
+    
+    colorschemes.tokyonight = {
+      enable = true;
+      style = "storm";
+    };
+
+    plugins.telescope.enable = true;
+
+  };
 }
