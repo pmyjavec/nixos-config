@@ -61,7 +61,7 @@
   # Removes "dbus" errors.
   programs.dconf.enable = true;
 
-  # The following is required by "aws-vault". 
-  services.gnome3.gnome-keyring.enable = true;
+  # The following is required by "aws-vault".  
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 }
