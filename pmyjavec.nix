@@ -42,9 +42,9 @@ in {
 
     general = {
       colors = true;
-      color_good = "#8C9440";
-      color_bad = "#A54242";
-      color_degraded = "#DE935F";
+      color_good = "#9ece6a";
+      color_bad = "#f7768e";
+      color_degraded = "#ff9e64";
     };
 
     modules = {
@@ -113,8 +113,6 @@ in {
     # nix related
     #
     # it provides the command `nom` works just like `nix`
-    # with more details log output
-    # nix-output-monitor
 
     # productivity
     # hugo # static site generator
@@ -154,6 +152,8 @@ in {
     gh
 
     chromium
+
+    aws-vault
   ];
 
   # basic configuration of git, please change to your own
@@ -313,11 +313,16 @@ in {
 
     keymaps = [
       {
+      #Telescope 
         key = "<Leader>fw";
         action = "<cmd>Telescope grep_string<CR>";
         options.desc = "Find word";
       }
-
+      {
+        key = "<Leader>fo";
+        action = "<cmd>Telescope oldfiles";
+        options.desc = "ToggleTerm old";
+      }
       {
         key = "<Leader>tf";
         action = "<cmd>ToggleTerm direction=float<CR>";
