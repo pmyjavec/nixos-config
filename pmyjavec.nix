@@ -9,6 +9,12 @@ in {
    home.shellAliases = { 
      man = "batman";
      diff = "batdiff";
+
+    
+     cnp = "aws-vault exec cert-nonprod --";
+     cnpa = "aws-vault exec cert-nonprod-admin --";
+     cpr = "aws-vault exec cert-prod --";
+     cpra = "aws-vault exec cert-prod-admin --";
    };
 
    home.sessionVariables = {
@@ -387,6 +393,19 @@ in {
 
     plugins = {
       auto-save.enable = true;
+      comment-nvim.enable = true;
+      copilot-lua.enable = true;
+      gitsigns.enable = true;
+      indent-blankline.enable = true;
+      lsp.enable = true;
+      lsp.servers.pyright.enable = true;
+      lspkind.enable = true;
+      lualine.enable = true;
+      neo-tree.enable = true;
+      nvim-colorizer.enable = true;
+      toggleterm.enable = true;
+      treesitter.enable = true;
+
       telescope = {
         enable = true;
         defaults = {
@@ -396,10 +415,6 @@ in {
             layout_config.prompt_position = "top";
         };
       };
-      lsp.enable = true;
-      gitsigns.enable = true;
-      treesitter.enable = true;
-      lualine.enable = true;
       which-key = {
 	      enable = true;
 	      registrations = {
@@ -417,14 +432,6 @@ in {
         };
 
       };
-      indent-blankline.enable = true;
-      toggleterm.enable = true;
-      nvim-colorizer.enable = true;
-      comment-nvim.enable = true;
-      neo-tree.enable = true;
-      lsp.servers.pyright.enable = true;
-      lspkind.enable = true;
-      copilot-lua.enable = true;
       alpha = {
        enable = true;
        iconsEnabled = true;
@@ -454,39 +461,39 @@ in {
           }
           {
             type = "group";
-	    opts.spacing = 1;
-	    val = [
-        {
-          shortcut = "n";
-          desc = " New file";
-          command = "<CMD>ene <CR>";
-        }
-        {
-	      shortcut = "SPC f f"; 
-	      desc = "󰈞 Find file";
-	      command = "<CMD>Telescope find_files<CR>";
-	      }
+	          opts.spacing = 1;
+	          val = [
               {
-	      shortcut = "SPC f o"; 
-	      desc = "󰊄  Recently opened files";
-	      command = "<CMD>Telescope oldfiles<CR>";
-	      }
+                shortcut = "n";
+                desc = " New file";
+                command = "<CMD>ene <CR>";
+              }
               {
-	      shortcut = "SPC f w"; 
-	      #desc = "󰈬 Find word";
-	      desc = "󰈬 Find word";
-	      command = "<CMD>Telescope grep_string<CR>";
-	      }
-              {
-	      shortcut = "SPC f '"; 
-	      desc = " Jump to bookmarks";
-	      command = "<CMD>Telescope marks<CR>";
-	      }
-              {
-	      shortcut = "SPC s l"; 
-	      desc = " Open last session";
-	      command = "";
-	      }
+	            shortcut = "SPC f f"; 
+	            desc = "󰈞 Find file";
+	            command = "<CMD>Telescope find_files<CR>";
+	            }
+                    {
+	            shortcut = "SPC f o"; 
+	            desc = "󰊄  Recently opened files";
+	            command = "<CMD>Telescope oldfiles<CR>";
+	            }
+                    {
+	            shortcut = "SPC f w"; 
+	            #desc = "󰈬 Find word";
+	            desc = "󰈬 Find word";
+	            command = "<CMD>Telescope grep_string<CR>";
+	            }
+                    {
+	            shortcut = "SPC f '"; 
+	            desc = " Jump to bookmarks";
+	            command = "<CMD>Telescope marks<CR>";
+	            }
+                    {
+	            shortcut = "SPC s l"; 
+	            desc = " Open last session";
+	            command = "";
+	            }
             ];
           }
           {
