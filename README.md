@@ -5,4 +5,4 @@ VM running on my M3 Mac running aarch64.
 
 ## TODO
 
-[ ] Fully manage neovim config with home-manager. Currently astronvim
+[X] Fully manage neovim config with home-manager. Currently astronvim
