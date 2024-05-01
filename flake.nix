@@ -15,7 +15,12 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, nixvim, home-manager, ... }: {
+  outputs = inputs @ 
+  { nixpkgs,
+    nixvim,
+    home-manager,
+    ...
+  }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -28,11 +33,11 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-	          home-manager.sharedModules = [
-	            nixvim.homeManagerModules.nixvim
-	          ];
+	    home-manager.sharedModules = [
+	      nixvim.homeManagerModules.nixvim
+	    ];
 
-            home-manager.users.pmyjavec = ./pmyjavec.nix;
+            home-manager.users.pmyjavec = import ./home;
           }
         ];
       };
