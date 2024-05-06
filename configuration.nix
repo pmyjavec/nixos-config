@@ -47,7 +47,7 @@
     name = "pmyjavec";
     home = "/home/pmyjavec";
     isNormalUser = true;
-    extraGroups = [ "wheel", "podman" ];
+    extraGroups = [ "wheel" "docker" ];
     group = "pmyjavec";
     shell = pkgs.zsh;
     hashedPassword = "$y$j9T$gKBywVHsXk90f0R8W5nQD0$1EXQ/5al7Mq.UkI.RKdQuFWwPRG3AiOpJoML7WmExc0";
@@ -65,5 +65,5 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  virtualisation.podman.enable = true;
+  virtualisation.docker.enable = true;
 }

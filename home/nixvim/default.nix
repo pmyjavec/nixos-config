@@ -94,6 +94,7 @@
       copilot-lua.enable = true;
       gitsigns.enable = true;
       gitblame.enable = true;
+      diffview.enable = true;
       indent-blankline.enable = true;
       lsp.enable = true;
       lsp.servers.pyright.enable = true;
