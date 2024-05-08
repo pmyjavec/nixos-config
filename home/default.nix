@@ -24,6 +24,7 @@
       cnpa = "aws-vault exec cert-nonprod-admin --";
       cpr = "aws-vault exec cert-prod --";
       cpra = "aws-vault exec cert-prod-admin --";
+      ls = "eza";
     };
 
     stateVersion = "23.11";

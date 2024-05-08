@@ -34,7 +34,6 @@
 
   environment.shellAliases = {
    vim = "nvim";
-   ls = "${pkgs.eza}/bin/eza";
   };
 
 
