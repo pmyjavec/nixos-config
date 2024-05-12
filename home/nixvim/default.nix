@@ -98,6 +98,7 @@
       indent-blankline.enable = true;
       lsp.enable = true;
       lsp.servers.pyright.enable = true;
+      lsp.servers.gopls.enable = true;
       lspkind.enable = true;
       lualine.enable = true;
       neo-tree.enable = true;
@@ -181,7 +182,7 @@
 	            shortcut = "SPC f w"; 
 	            #desc = "󰈬 Find word";
 	            desc = "󰈬 Find word";
-	            command = "<CMD>Telescope grep_string<CR>";
+	            command = "<CMD>Telescope live_grep<CR>";
 	            }
                     {
 	            shortcut = "SPC f '"; 
