@@ -17,7 +17,7 @@
       {
       #Telescope 
         key = "<Leader>fw";
-        action = "<cmd>Telescope grep_string<CR>";
+        action = "<cmd>Telescope live_grep<CR>";
         options.desc = "Find word";
       }
       {
@@ -89,7 +89,7 @@
 
     plugins = {
       auto-save.enable = true;
-      auto-session.enable = true;
+      auto-session.enable =  false;
       comment-nvim.enable = true;
       copilot-lua.enable = true;
       gitsigns.enable = true;

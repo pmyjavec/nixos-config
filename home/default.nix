@@ -93,7 +93,7 @@
      pciutils # lspci
      usbutils # lsusb
 
-     # Coding tools
+     # Coding / dev tools
      devbox
      nodejs
 
@@ -103,7 +103,11 @@
      eza 
      tree-sitter
      lazygit
+
+     # CI/CD tools
      gh
+     circleci-cli
+
 
      chromium
 
