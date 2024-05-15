@@ -11,7 +11,7 @@
 
     extraConfigLua = builtins.readFile ./nvim.lua;	
 
-    extraPlugins = with pkgs.vimPlugins; [ lazygit-nvim ];
+    extraPlugins = with pkgs.vimPlugins; [ lazygit-nvim go-nvim ];
 
     keymaps = [
       {
@@ -78,8 +78,6 @@
       virtualedit = "block"; #allow going past end of line in visual block mode
       wrap = false; #disable wrapping of lines longer than the width of window
       writebackup = false; #disable making a backup before overwriting a file
-
-
     };
     
     colorschemes.tokyonight = {
@@ -105,6 +103,7 @@
       nvim-colorizer.enable = true;
       toggleterm.enable = true;
       treesitter.enable = true;
+      lastplace.enable = true;
 
       telescope = {
         enable = true;

@@ -1,5 +1,6 @@
-require('telescope').load_extension('lazygit')
+require('go').setup()
 require('nvim-web-devicons').setup()
+require('telescope').load_extension('lazygit')
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
