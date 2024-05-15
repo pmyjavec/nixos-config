@@ -2,9 +2,10 @@
 
 {
   # setup windowing environment
+  services.displayManager.defaultSession = "none+i3";
   services.xserver = {
     enable = true;
-    layout = "us";
+    xkb.layout = "us";
     dpi = 220;
   
     desktopManager = {
@@ -13,7 +14,6 @@
     };
   
     displayManager = {
-      defaultSession = "none+i3";
       lightdm.enable = true;
   
       # AARCH64: For now, on Apple Silicon, we must manually set the

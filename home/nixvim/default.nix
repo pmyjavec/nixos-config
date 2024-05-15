@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
-
 {
+
+  imports = [
+    ./welcome.nix
+  ];
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -11,19 +15,38 @@
 
     extraConfigLua = builtins.readFile ./nvim.lua;	
 
-    extraPlugins = with pkgs.vimPlugins; [ lazygit-nvim go-nvim ];
+    extraPlugins = with pkgs.vimPlugins; [ go-nvim ];
 
     keymaps = [
       {
-      #Telescope 
+        key = "<Leader>n";
+        action = "<cmd>ene<CR>";
+        options.desc = "New File";
+      }
+      {
         key = "<Leader>fw";
         action = "<cmd>Telescope live_grep<CR>";
         options.desc = "Find word";
       }
       {
         key = "<Leader>fo";
-        action = "<cmd>Telescope oldfiles";
-        options.desc = "ToggleTerm old";
+        action = "<cmd>Telescope oldfiles<CR>";
+        options.desc = "Find Recents";
+      }
+      {
+        key = "<Leader>ff";
+        action = "<cmd>Telescope find_files<CR>";
+        options.desc = "Find File(s)";
+      }
+      {
+        key = "<Leader>fb";
+        action = "<cmd>Telescope buffers<CR>";
+        options.desc = "Find Buffers";
+      }
+      {
+        key = "<Leader>fm";
+        action = "<cmd>Telescope marks<CR>";
+        options.desc = "Find Marks";
       }
       {
         key = "<Leader>tf";
@@ -82,36 +105,41 @@
     
     colorschemes.tokyonight = {
       enable = true;
-      style = "storm";
+      settings.style = "storm";
     };
 
     plugins = {
       auto-save.enable = true;
       auto-session.enable =  false;
-      comment-nvim.enable = true;
+      comment.enable = true;
       copilot-lua.enable = true;
-      gitsigns.enable = true;
-      gitblame.enable = true;
       diffview.enable = true;
+      gitblame.enable = true;
+      gitsigns.enable = true;
       indent-blankline.enable = true;
+      lazygit.enable = true;
+      lastplace.enable = true;
       lsp.enable = true;
-      lsp.servers.pyright.enable = true;
       lsp.servers.gopls.enable = true;
+      lsp.servers.golangci-lint-ls.enable = true; 
+      lsp.servers.marksman.enable = true;
+      lsp.servers.pyright.enable = true;
       lspkind.enable = true;
       lualine.enable = true;
       neo-tree.enable = true;
       nvim-colorizer.enable = true;
+      tagbar.enable = true;
       toggleterm.enable = true;
       treesitter.enable = true;
-      lastplace.enable = true;
-
       telescope = {
         enable = true;
-        defaults = {
-            set_env.COLORTERM = "truecolor";
-            sorting_strategy = "ascending";
-            selection_caret = "> ";
-            layout_config.prompt_position = "top";
+        settings = {
+          defaults = {
+              set_env.COLORTERM = "truecolor";
+              sorting_strategy = "ascending";
+              selection_caret = "> ";
+              layout_config.prompt_position = "top";
+          };
         };
       };
       which-key = {
@@ -129,92 +157,6 @@
             suggestions = 20;
           };
         };
-
-      };
-      alpha = {
-       enable = true;
-       iconsEnabled = true;
-       layout = [
-          {
-            type = "padding";
-            val = 2;
-          }
-          {
-            type = "text";
-            val = [
-              "  ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗  "
-              "  ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║  "
-              "  ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║  "
-              "  ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║  "
-              "  ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║  "
-              "  ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝  "
-            ];
-            opts = {
-              position = "center";
-              hl = "Type";
-            };
-          }
-          {
-            type = "padding";
-            val = 2;
-          }
-          {
-            type = "group";
-	          opts.spacing = 1;
-	          val = [
-              {
-                shortcut = "n";
-                desc = " New file";
-                command = "<CMD>ene <CR>";
-              }
-              {
-	            shortcut = "SPC f f"; 
-	            desc = "󰈞 Find file";
-	            command = "<CMD>Telescope find_files<CR>";
-	            }
-                    {
-	            shortcut = "SPC f o"; 
-	            desc = "󰊄  Recently opened files";
-	            command = "<CMD>Telescope oldfiles<CR>";
-	            }
-                    {
-	            shortcut = "SPC f w"; 
-	            #desc = "󰈬 Find word";
-	            desc = "󰈬 Find word";
-	            command = "<CMD>Telescope live_grep<CR>";
-	            }
-                    {
-	            shortcut = "SPC f '"; 
-	            desc = " Jump to bookmarks";
-	            command = "<CMD>Telescope marks<CR>";
-	            }
-                    {
-	            shortcut = "SPC s l"; 
-	            desc = " Open last session";
-	            command = "";
-	            }
-            ];
-          }
-          {
-            type = "padding";
-            val = 2;
-          }
-          {
-            type = "text";
-            val = "Inspiring quote here.";
-            opts = {
-              position = "center";
-              hl = "Keyword";
-            };
-          }
-        ];
-      };
-
-      #tagbar.enable = true;
-      nvim-cmp = {
-        enable = true;
-
-        sources = [ [ { name = "nvim_lsp"; } ] ];
       };
     };
   };

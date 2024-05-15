@@ -182,8 +182,10 @@
   services.gpg-agent = {
     enable = true; 
     enableSshSupport = true;
-    pinentryFlavor = "qt";
     enableScDaemon = true;
+    pinentryPackage = pkgs.pinentry-tty;
+    defaultCacheTtl = 31536000;
+    maxCacheTtl = 31536000;
   };
 
   # Apparently this stops GPG from talking to ccid and 
