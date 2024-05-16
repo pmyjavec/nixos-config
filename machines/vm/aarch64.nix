@@ -5,7 +5,7 @@
     ../../modules/vmware-guest.nix
   ];
 
-  boot.binfmt.emulatedSystems = ["x86_64-linux"];
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   # Disable the default module and import our override. We have
   # customizations to make this work on aarch64.

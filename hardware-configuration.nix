@@ -12,12 +12,14 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/588e512b-d002-402a-a17c-fb1117842d62";
+    {
+      device = "/dev/disk/by-uuid/588e512b-d002-402a-a17c-fb1117842d62";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5CC1-C448";
+    {
+      device = "/dev/disk/by-uuid/5CC1-C448";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
@@ -37,5 +39,5 @@
 
   # Maybe Required to get GPG and Yubikeys working. commented
   # services.udev.packages = with pkgs; [ yubikey-personalization ];
-  
+
 }

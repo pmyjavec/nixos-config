@@ -17,7 +17,7 @@
 
     username = "pmyjavec";
     homeDirectory = "/home/pmyjavec";
-    shellAliases = { 
+    shellAliases = {
       man = "batman";
       diff = "batdiff";
       cnp = "aws-vault exec cert-nonprod --";
@@ -37,82 +37,82 @@
 
     # Packages that should be installed to the user profile.
     packages = with pkgs; [
-     neofetch
-     nnn 
+      neofetch
+      nnn
 
-     # archives
-     zip
-     xz
-     unzip
-     p7zip
+      # archives
+      zip
+      xz
+      unzip
+      p7zip
 
-     # networking tools
-     mtr # A network diagnostic tool
-     iperf3
-     dnsutils  # `dig` + `nslookup`
-     ldns # replacement of `dig`, it provide the command `drill`
-     aria2 # A lightweight multi-protocol & multi-source command-line download utility
-     socat # replacement of openbsd-netcat
-     nmap # A utility for network discovery and security auditing
-     ipcalc  # it is a calculator for the IPv4/v6 addresses
+      # networking tools
+      mtr # A network diagnostic tool
+      iperf3
+      dnsutils # `dig` + `nslookup`
+      ldns # replacement of `dig`, it provide the command `drill`
+      aria2 # A lightweight multi-protocol & multi-source command-line download utility
+      socat # replacement of openbsd-netcat
+      nmap # A utility for network discovery and security auditing
+      ipcalc # it is a calculator for the IPv4/v6 addresses
 
-     # man pages
-     man
+      # man pages
+      man
 
-     # misc
-     #cowsay
-     file
-     which
-     tree
-     gnused
-     gnutar
-     gawk
-     zstd
+      # misc
+      #cowsay
+      file
+      which
+      tree
+      gnused
+      gnutar
+      gawk
+      zstd
 
-     # GPG, Yubikey & Friends
-     gnupg
-     yubikey-personalization
-     yubico-piv-tool
-     yubikey-personalization-gui
-     yubikey-manager
-     pass
+      # GPG, Yubikey & Friends
+      gnupg
+      yubikey-personalization
+      yubico-piv-tool
+      yubikey-personalization-gui
+      yubikey-manager
+      pass
 
-     # fonts
-     (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
-     iosevka 
+      # fonts
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+      iosevka
 
-     # system utils
-     btop  # replacement of htop/nmon
-     iotop # io monitoring
-     iftop # network monitoring
-     strace # system call monitoring
-     ltrace # library call monitoring
-     lsof # list open files
-     sysstat
-     ethtool
-     pciutils # lspci
-     usbutils # lsusb
+      # system utils
+      btop # replacement of htop/nmon
+      iotop # io monitoring
+      iftop # network monitoring
+      strace # system call monitoring
+      ltrace # library call monitoring
+      lsof # list open files
+      sysstat
+      ethtool
+      pciutils # lspci
+      usbutils # lsusb
 
-     # Coding / dev tools
-     devbox
-     nodejs
+      # Coding / dev tools
+      devbox
+      nodejs
 
-     fzf
-     ripgrep # recursively searches directories for a regex pattern
-     jq # A lightweight and flexible command-line JSON processor
-     eza 
-     tree-sitter
-     lazygit
+      fzf
+      ripgrep # recursively searches directories for a regex pattern
+      jq # A lightweight and flexible command-line JSON processor
+      eza
+      tree-sitter
+      lazygit
 
-     # CI/CD tools
-     gh
-     circleci-cli
+      # CI/CD tools
+      gh
+      circleci-cli
 
 
-     chromium
+      chromium
 
-     aws-vault
-   ];
+      aws-vault
+    ];
   };
 
   # basic configuration of git, please change to your own
@@ -164,9 +164,9 @@
       enable = true;
       plugins = [
         "git"
-  	    "sudo"
-	      "vi-mode"
-	      "z"
+        "sudo"
+        "vi-mode"
+        "z"
       ];
     };
   };
@@ -180,7 +180,7 @@
   # GPG Agent setup, setup is a little more complicated
   # due to my Yubikey setup.
   services.gpg-agent = {
-    enable = true; 
+    enable = true;
     enableSshSupport = true;
     enableScDaemon = true;
     pinentryPackage = pkgs.pinentry-tty;
@@ -204,7 +204,7 @@
     config = {
       pager = "less -FR";
       theme = "tokyonight";
-    }; 
+    };
 
     themes = {
       tokyonight = {

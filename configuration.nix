@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
   ];
 
-  system.stateVersion = "23.11"; 
+  system.stateVersion = "23.11";
 
   # ......
   boot.loader.systemd-boot.enable = true;
@@ -33,7 +33,7 @@
   #users.users.root.initialPassword = "root";
 
   environment.shellAliases = {
-   vim = "nvim";
+    vim = "nvim";
   };
 
 
@@ -52,7 +52,7 @@
     hashedPassword = "$y$j9T$gKBywVHsXk90f0R8W5nQD0$1EXQ/5al7Mq.UkI.RKdQuFWwPRG3AiOpJoML7WmExc0";
   };
 
-  users.groups.pmyjavec = {};
+  users.groups.pmyjavec = { };
 
   security.polkit.enable = true;
 
@@ -67,7 +67,7 @@
   virtualisation.docker.enable = true;
 
   networking.firewall = {
-   enable = true;
-   allowedTCPPorts = [ 22 8000 ];
-  }; 
+    enable = true;
+    allowedTCPPorts = [ 22 8000 ];
+  };
 }

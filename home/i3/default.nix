@@ -1,7 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
+{ pkgs
+, config
+, ...
 }: {
   home.file.".config/i3/config".source = ./config;
 
@@ -17,14 +16,14 @@
   };
 
   xresources.extraConfig = ''
-  ${builtins.readFile (
-      pkgs.fetchFromGitHub {
-        owner = "folke";
-        repo = "tokyonight.nvim";
-        rev = "main";
-        sha256 = "vUEPbgDen3ubcyJZdWCgnChOo1T0LFvZI++8RgGGx1Y=";
-      } + "/extras/xresources/tokyonight_storm.Xresources"
-    )}
+    ${builtins.readFile (
+        pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim";
+          rev = "main";
+          sha256 = "vUEPbgDen3ubcyJZdWCgnChOo1T0LFvZI++8RgGGx1Y=";
+        } + "/extras/xresources/tokyonight_storm.Xresources"
+      )}
   '';
 
   programs.i3status = {

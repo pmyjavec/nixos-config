@@ -13,7 +13,7 @@
     # alpha plugin in 23.11 module doesn't let us set a theme.
     globals.mapleader = " ";
 
-    extraConfigLua = builtins.readFile ./nvim.lua;	
+    extraConfigLua = builtins.readFile ./nvim.lua;
 
     extraPlugins = with pkgs.vimPlugins; [ go-nvim ];
 
@@ -103,7 +103,7 @@
       wrap = false; #disable wrapping of lines longer than the width of window
       writebackup = false; #disable making a backup before overwriting a file
     };
-    
+
     colorschemes.tokyonight = {
       enable = true;
       settings.style = "storm";
@@ -111,7 +111,7 @@
 
     plugins = {
       auto-save.enable = true;
-      auto-session.enable =  false;
+      auto-session.enable = false;
       comment.enable = true;
       copilot-lua.enable = true;
       diffview.enable = true;
@@ -122,7 +122,7 @@
       lastplace.enable = true;
       lsp.enable = true;
       lsp.servers.gopls.enable = true;
-      lsp.servers.golangci-lint-ls.enable = true; 
+      lsp.servers.golangci-lint-ls.enable = true;
       lsp.servers.marksman.enable = true;
       lsp.servers.pyright.enable = true;
       lspkind.enable = true;
@@ -136,19 +136,19 @@
         enable = true;
         settings = {
           defaults = {
-              set_env.COLORTERM = "truecolor";
-              sorting_strategy = "ascending";
-              selection_caret = "> ";
-              layout_config.prompt_position = "top";
+            set_env.COLORTERM = "truecolor";
+            sorting_strategy = "ascending";
+            selection_caret = "> ";
+            layout_config.prompt_position = "top";
           };
         };
       };
       which-key = {
-	      enable = true;
-	      registrations = {
+        enable = true;
+        registrations = {
           "<Leader>f" = " Find";
           "<Leader>t" = " Terminal";
-	      };
+        };
 
         plugins = {
           marks = false;
