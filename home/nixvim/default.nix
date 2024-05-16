@@ -89,6 +89,7 @@
       showtabline = 1; #always display tabline
       signcolumn = "yes"; #always show the sign column
       smartcase = true; #case sensitive searching
+      spell = true;
       splitbelow = true; #splitting a new window below the current one
       splitright = true; #splitting a new window at the right of the current one
       tabstop = 2; #number of space in a tab
