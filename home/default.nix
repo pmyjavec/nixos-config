@@ -7,7 +7,7 @@
     ./wezterm
   ];
 
-  #++ import ./programs 
+  #++ import ./programs
   #++ import ./shell
   #++ [
   #];
@@ -25,6 +25,7 @@
       cpr = "aws-vault exec cert-prod --";
       cpra = "aws-vault exec cert-prod-admin --";
       ls = "eza";
+      lr = "eza -lrt created";
     };
 
     stateVersion = "23.11";
@@ -112,6 +113,10 @@
       chromium
 
       aws-vault
+
+      #Kubernetes
+      k9s
+      kubectl
     ];
   };
 
@@ -130,6 +135,10 @@
 
     delta = {
       enable = true;
+    };
+
+    push = {
+      autoSetupRemote = true;
     };
 
     extraConfig = {
@@ -177,6 +186,9 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Direnv
+  programs.direnv.enable = true;
+
   # GPG Agent setup, setup is a little more complicated
   # due to my Yubikey setup.
   services.gpg-agent = {
@@ -188,9 +200,9 @@
     maxCacheTtl = 31536000;
   };
 
-  # Apparently this stops GPG from talking to ccid and 
+  # Apparently this stops GPG from talking to ccid and
   # forces it to use the "SC" Daemon enabled above.
-  #programs.gpg.scdaemonSettings = { 
+  #programs.gpg.scdaemonSettings = {
   #  disable-ccid = true;
   #};
 

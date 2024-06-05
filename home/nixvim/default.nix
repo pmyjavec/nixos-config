@@ -114,6 +114,7 @@
       auto-session.enable = false;
       comment.enable = true;
       copilot-lua.enable = true;
+      conform-nvim.enable = true;
       diffview.enable = true;
       gitblame.enable = true;
       gitsigns.enable = true;
@@ -125,6 +126,7 @@
       lsp.servers.golangci-lint-ls.enable = true;
       lsp.servers.marksman.enable = true;
       lsp.servers.pyright.enable = true;
+      lsp.servers.terraformls.enable = true;
       lspkind.enable = true;
       lualine.enable = true;
       neo-tree.enable = true;
@@ -154,7 +156,7 @@
           marks = false;
           registers = false;
           spelling = {
-            enabled = false;
+            enabled = true;
             suggestions = 20;
           };
         };
