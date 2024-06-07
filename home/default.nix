@@ -104,6 +104,7 @@
       eza
       tree-sitter
       lazygit
+      copier
 
       # CI/CD tools
       gh
