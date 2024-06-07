@@ -49,6 +49,21 @@
         options.desc = "Find Marks";
       }
       {
+        key = "<Leader>fd";
+        action = "<cmd>Telescope lsp_definitions<CR>";
+        options.desc = "Find LSP Definitions";
+      }
+      {
+        key = "<Leader>fr";
+        action = "<cmd>Telescope lsp_references<CR>";
+        options.desc = "Find LSP References";
+      }
+      {
+        key = "<Leader>fm";
+        action = "<cmd>Telescope marks<CR>";
+        options.desc = "Find Marks";
+      }
+      {
         key = "<Leader>tf";
         action = "<cmd>ToggleTerm direction=float<CR>";
         options.desc = "ToggleTerm float";
