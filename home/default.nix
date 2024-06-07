@@ -137,15 +137,15 @@
       enable = true;
     };
 
-    push = {
-      autoSetupRemote = true;
-    };
-
     extraConfig = {
       url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
+      };
+
+      push = {
+        autoSetupRemote = true;
       };
     };
   };
