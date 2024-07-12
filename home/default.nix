@@ -118,6 +118,10 @@
       #Kubernetes
       k9s
       kubectl
+      kubelogin
+      kubelogin-oidc
+      kubectx
+
     ];
   };
 
@@ -233,5 +237,10 @@
     };
 
     extraPackages = with pkgs.bat-extras; [ batdiff batman ];
+  };
+
+  programs.ssh = {
+    enable = true;
+    serverAliveInterval = 30;
   };
 }

@@ -68,6 +68,11 @@
         action = "<cmd>ToggleTerm direction=float<CR>";
         options.desc = "ToggleTerm float";
       }
+      {
+        key = "<Leader>tr";
+        action = "<cmd>Neotest run<CR>";
+        options.desc = "Neotest Run";
+      }
     ];
 
     opts = {
@@ -128,7 +133,6 @@
       auto-save.enable = true;
       auto-session.enable = false;
       comment.enable = true;
-      copilot-lua.enable = true;
       conform-nvim.enable = true;
       diffview.enable = true;
       gitblame.enable = true;
@@ -144,11 +148,93 @@
       lsp.servers.terraformls.enable = true;
       lspkind.enable = true;
       lualine.enable = true;
+      luasnip.enable = true;
+      friendly-snippets.enable = true;
       neo-tree.enable = true;
       nvim-colorizer.enable = true;
       tagbar.enable = true;
       toggleterm.enable = true;
       treesitter.enable = true;
+      copilot-vim.enable = false;
+      copilot-lua = {
+        enable = true;
+
+        suggestion = {
+          enabled = false;
+          autoTrigger = false;
+
+          keymap = {
+            accept = "<C-l>";
+            next = "<C-j>";
+            prev = "<C-k>";
+            dismiss = "<C-h>";
+          };
+        };
+
+        panel = {
+          enabled = false;
+          keymap = {
+            open = false;
+            accept = "<cr>";
+            jumpNext = "<C-j>";
+            jumpPrev = "<C-k>";
+            refresh = "<C-r>";
+          };
+        };
+
+        filetypes = {
+          javascript = true;
+          typescript = true;
+          css = true;
+          rust = true;
+          python = true;
+          java = true;
+          c = true;
+          cpp = true;
+          nix = true;
+          lua = true;
+
+          yaml = false;
+          markdown = false;
+          help = false;
+          gitcommit = false;
+          gitrebase = false;
+          hgcommit = false;
+          svn = false;
+          cvs = false;
+          "." = false;
+        };
+      };
+      cmp = {
+        enable = true;
+        settings.sources =
+          [
+            { name = "nvim_lsp"; }
+            { name = "path"; }
+            { name = "buffer"; }
+            { name = "luasnip"; }
+            { name = "cmdline"; }
+            { name = "copilot"; }
+          ];
+
+        settings.mapping = {
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-e>" = "cmp.mapping.close()";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+        };
+
+        settings.snippet.expand = ''
+        function(args)
+        require('luasnip').lsp_expand(args.body)
+        end
+        '';
+      };
+      cmp-cmdline.enable = true;
+      copilot-cmp.enable = true;
       telescope = {
         enable = true;
         settings = {
@@ -160,6 +246,15 @@
           };
         };
       };
+
+      neotest = {
+        enable = true;
+        adapters = {
+          python.enable = true;
+          go.enable = true;
+        };
+      };
+
       which-key = {
         enable = true;
         registrations = {

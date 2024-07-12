@@ -1,11 +1,19 @@
 { config, pkgs, lib, ... }: {
-  # Setup qemu so we can run x86_64 binaries
 
   imports = [
     ../../modules/vmware-guest.nix
   ];
 
+  # Setup qfmu so we can run x86_64 binaries
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
+  # boot.binfmt.matchCredentials = true;
+
+  boot.binfmt.registrations."x86_64" = {
+    interpreter = "${pkgs.qemu}/bin/qemu-x86_64";
+    fixBinary = true;
+    matchCredentials = true;
+    magicOrExtension = ''\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00'';
+  };
 
   # Disable the default module and import our override. We have
   # customizations to make this work on aarch64.
