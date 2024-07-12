@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local config = {}
 
 if wezterm.config_builder then
@@ -9,7 +10,7 @@ config.audible_bell = 'Disabled'
 config.color_scheme = 'Tokyo Night Storm'
 config.enable_scroll_bar = false
 config.enable_wayland = false
-config.enable_tab_bar = false
+config.enable_tab_bar = true
 config.font = wezterm.font 'FiraCode Nerd Font Mono Ret'
 config.font_size = 9.0
 config.hide_mouse_cursor_when_typing = true
@@ -19,9 +20,11 @@ config.inactive_pane_hsb = {
 }
 config.pane_focus_follows_mouse = true
 config.scrollback_lines = 20000
-config.tab_bar_at_bottom = false
+config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.window_background_opacity = 1.0
+config.use_ime = false
+config.debug_key_events = true
 
 config.visual_bell = {
   fade_in_function = 'EaseIn',
@@ -30,14 +33,15 @@ config.visual_bell = {
   fade_out_duration_ms = 150,
 }
 
- config.colors = {
-   visual_bell = '#202020',
- }
+
+config.colors = {
+  visual_bell = '#202020',
+}
 
 config.term = 'wezterm'
 
- -- Key bindings
-config.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 8000 }
+-- Key bindings
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 8000 }
 
 config.keys = {
   -- Tab control and navigation
@@ -151,6 +155,7 @@ config.key_tables = {
         act.CopyMode 'Close',
         'PopKeyTable',
         'ScrollToBottom',
+        --act.SendKey { key = 'q', mods = 'CTRL' },
       },
     },
   },
