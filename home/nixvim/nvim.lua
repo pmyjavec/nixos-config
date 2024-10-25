@@ -1,5 +1,6 @@
 require('go').setup()
 require('nvim-web-devicons').setup()
+require('leap').create_default_mappings()
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
@@ -10,7 +11,12 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
+
+vim.keymap.set('n', '<C-Q>', '<Cmd>:qa!<CR>')
+vim.keymap.set('n', '<C-q>', '<Cmd>:wq<CR>')
+
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

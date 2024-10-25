@@ -41,7 +41,7 @@ config.colors = {
 config.term = 'wezterm'
 
 -- Key bindings
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 8000 }
+config.leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 8000 }
 
 config.keys = {
   -- Tab control and navigation

@@ -69,9 +69,29 @@
         options.desc = "ToggleTerm float";
       }
       {
+        key = "<Leader>tf";
+        action = "<cmd>ToggleTerm direction=horizontal<CR>";
+        options.desc = "ToggleTerm horizontal";
+      }
+      {
         key = "<Leader>tr";
         action = "<cmd>Neotest run<CR>";
         options.desc = "Neotest Run";
+      }
+      {
+        key = "<Leader>e";
+        action = "<cmd>Neotree toggle<CR>";
+        options.desc = "Explorer";
+      }
+      {
+        key = "<Leader>gd";
+        action = "<cmd>Diffview open<CR>";
+        options.desc = "toggle diff";
+      }
+      {
+        key = "<Leader>gg";
+        action = "<cmd>LazyGit<CR>";
+        options.desc = "Lazygit terminal";
       }
     ];
 
@@ -140,21 +160,28 @@
       indent-blankline.enable = true;
       lazygit.enable = true;
       lastplace.enable = true;
+      leap.enable = true;
       lsp.enable = true;
       lsp.servers.gopls.enable = true;
       lsp.servers.golangci-lint-ls.enable = true;
       lsp.servers.marksman.enable = true;
       lsp.servers.pyright.enable = true;
       lsp.servers.terraformls.enable = true;
+      lsp.servers.bashls.enable = true;
       lspkind.enable = true;
       lualine.enable = true;
       luasnip.enable = true;
       friendly-snippets.enable = true;
       neo-tree.enable = true;
+      neoscroll.enable = true;
+      noice.enable = true;
       nvim-colorizer.enable = true;
       tagbar.enable = true;
       toggleterm.enable = true;
       treesitter.enable = true;
+      surround.enable = true;
+      trouble.enable = true;
+      twilight.enable = true;
       copilot-vim.enable = false;
       copilot-lua = {
         enable = true;

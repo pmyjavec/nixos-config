@@ -26,6 +26,9 @@
       cpra = "aws-vault exec cert-prod-admin --";
       ls = "eza";
       lr = "eza -lrt created";
+      k = "kubectl";
+      kx = "kubectx";
+      v = "nvim";
     };
 
     stateVersion = "23.11";
@@ -46,6 +49,8 @@
       xz
       unzip
       p7zip
+
+      _1password
 
       # networking tools
       mtr # A network diagnostic tool
@@ -154,7 +159,6 @@
       };
     };
   };
-
   # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
