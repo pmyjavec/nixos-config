@@ -13,6 +13,11 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    devbox = {
+      url = "github:jkinred/devbox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,15 +25,19 @@
     { nixpkgs
     , nixvim
     , home-manager
+    , devbox
     , ...
     }: {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
+
+
           modules = [
             ./configuration.nix
             ./machines/vm/aarch64.nix
             ./graphical.nix
+
 
             home-manager.nixosModules.home-manager
             {
@@ -37,6 +46,7 @@
               home-manager.sharedModules = [
                 nixvim.homeManagerModules.nixvim
               ];
+              home-manager.extraSpecialArgs = { inherit devbox; };
 
               home-manager.users.pmyjavec = import ./home;
             }

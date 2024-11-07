@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs,... }:
 
 {
   imports = [
@@ -22,6 +22,7 @@
     wget
     curl
     nmap
+    devbox
   ];
 
   # Set the default editor to vim
@@ -38,7 +39,7 @@
 
 
   # NOTE: There seems to be a bit of cross over between what is defined here
-  # and what is found in the home manager (home.nix), find out why and if that 
+  # and what is found in the home manager (home.nix), find out why and if that
   # can be avoided...
 
   programs.zsh.enable = true;
@@ -60,7 +61,7 @@
   # Removes "dbus" errors.
   programs.dconf.enable = true;
 
-  # The following is required by "aws-vault".  
+  # The following is required by "aws-vault".
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 

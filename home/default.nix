@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs,... }:
 
 {
   imports = [
@@ -14,7 +14,6 @@
 
   # TODO please change the username & home directory to your own
   home = {
-
     username = "pmyjavec";
     homeDirectory = "/home/pmyjavec";
     shellAliases = {
@@ -41,6 +40,7 @@
 
     # Packages that should be installed to the user profile.
     packages = with pkgs; [
+      inputs.devbox.packages.aarch64-linux
       neofetch
       nnn
 
@@ -98,9 +98,9 @@
       ethtool
       pciutils # lspci
       usbutils # lsusb
+      gron
 
       # Coding / dev tools
-      devbox
       nodejs
 
       fzf
