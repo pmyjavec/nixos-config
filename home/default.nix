@@ -1,4 +1,4 @@
-{ config, pkgs, inputs,... }:
+{ config, pkgs, inputs, devbox,... }:
 
 {
   imports = [
@@ -40,7 +40,6 @@
 
     # Packages that should be installed to the user profile.
     packages = with pkgs; [
-      inputs.devbox.packages.aarch64-linux
       neofetch
       nnn
 
@@ -158,6 +157,17 @@
         autoSetupRemote = true;
       };
     };
+
+     includes = [
+      {
+        condition = "hasconfig:remote.*.url:git@github.com:LF-Certification/**";
+        contents = {
+          user = {
+            email = "pmyjavec@linuxfoundation.org";
+          };
+        };
+      }
+    ];
   };
   # starship - an customizable prompt for any shell
   programs.starship = {

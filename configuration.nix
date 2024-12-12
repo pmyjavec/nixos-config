@@ -1,4 +1,4 @@
-{ config, pkgs, inputs,... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -22,7 +22,6 @@
     wget
     curl
     nmap
-    devbox
   ];
 
   # Set the default editor to vim
@@ -42,6 +41,7 @@
   # and what is found in the home manager (home.nix), find out why and if that
   # can be avoided...
 
+  programs.nix-ld.enable = true;
   programs.zsh.enable = true;
   users.users.pmyjavec = {
     name = "pmyjavec";
