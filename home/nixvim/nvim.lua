@@ -1,6 +1,5 @@
 require('go').setup()
 require('nvim-web-devicons').setup()
-require('leap').create_default_mappings()
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}

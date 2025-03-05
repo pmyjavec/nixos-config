@@ -160,7 +160,7 @@
       indent-blankline.enable = true;
       lazygit.enable = true;
       lastplace.enable = true;
-      leap.enable = true;
+      leap.enable = false;
       lsp.enable = true;
       lsp.servers.gopls.enable = true;
       lsp.servers.golangci-lint-ls.enable = true;
