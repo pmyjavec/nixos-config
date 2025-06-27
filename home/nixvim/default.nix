@@ -290,7 +290,6 @@
         };
 
         plugins = {
-          marks = false;
           registers = false;
           spelling = {
             enabled = true;

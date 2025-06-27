@@ -10,7 +10,6 @@
 
   boot.binfmt.registrations."x86_64" = {
     interpreter = "${pkgs.qemu}/bin/qemu-x86_64";
-    fixBinary = true;
     matchCredentials = true;
     magicOrExtension = ''\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00'';
   };
@@ -30,7 +29,6 @@
   virtualisation.vmware.guest.enable = true;
 
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
 
   # Share our host filesystem
   #fileSystems."/host" = {

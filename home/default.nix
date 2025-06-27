@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, devbox,... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -83,7 +83,7 @@
       pass
 
       # fonts
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+      pkgs.nerd-fonts.fira-code
       iosevka
 
       # system utils
@@ -101,6 +101,7 @@
 
       # Coding / dev tools
       nodejs
+      devbox
 
       fzf
       ripgrep # recursively searches directories for a regex pattern
@@ -114,7 +115,6 @@
       gh
       circleci-cli
 
-
       chromium
 
       aws-vault
@@ -126,6 +126,8 @@
       kubelogin-oidc
       kubectx
 
+      # Add claude-code
+      claude-code
     ];
   };
 
@@ -201,7 +203,6 @@
 
   programs.bash.enable = true;
 
-
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -227,7 +228,6 @@
 
   # Find and manage installed fonts from packages.
   fonts.fontconfig.enable = true;
-
 
   programs.bat = {
     enable = true;
