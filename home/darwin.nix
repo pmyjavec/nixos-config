@@ -3,6 +3,9 @@
 {
   imports = [ ./common.nix ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   home = {
     homeDirectory = "/Users/pmyjavec";
     

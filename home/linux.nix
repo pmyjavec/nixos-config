@@ -6,6 +6,9 @@
     ./i3
   ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   home = {
     homeDirectory = "/home/pmyjavec";
     
