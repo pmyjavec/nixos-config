@@ -8,7 +8,7 @@
 
   home = {
     homeDirectory = "/Users/pmyjavec";
-    
+
     # macOS-specific packages
     packages = with pkgs; [
       # Note: Some packages like 1Password may work differently on macOS
@@ -23,7 +23,7 @@
     enable = true;
     enableSshSupport = true;
     enableScDaemon = true;
-    pinentryPackage = pkgs.pinentry_mac;
+    pinentry.package = pkgs.pinentry_mac;
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
@@ -37,10 +37,13 @@
       orientation = "bottom";
       tilesize = 48;
     };
-    
+
     "com.apple.finder" = {
       AppleShowAllExtensions = true;
       FXPreferredViewStyle = "clmv"; # Column view
     };
   };
+
+  # Hammerspoon configuration
+  home.file.".hammerspoon/init.lua".source = ./hammerspoon/init.lua;
 }
