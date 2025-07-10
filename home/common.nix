@@ -22,6 +22,7 @@
       k = "kubectl";
       kx = "kubectx";
       v = "nvim";
+      vim = "nvim";
     };
 
     sessionVariables = {
@@ -103,6 +104,11 @@
       # GPG and password management (cross-platform)
       gnupg
       pass
+      
+      # YubiKey support (cross-platform)
+      yubikey-manager
+      yubikey-personalization
+      yubico-piv-tool
     ];
   };
 
@@ -181,6 +187,7 @@
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.home-manager.backupFileExtension = "backup";
 
   # Direnv
   programs.direnv.enable = true;
