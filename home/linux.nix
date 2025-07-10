@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ 
@@ -15,13 +15,21 @@
       xclip
       chromium
 
-      # GPG, Yubikey & Friends
-      gnupg
+      # Linux-specific system tools
+      iotop # io monitoring
+      iftop # network monitoring
+      strace # system call monitoring
+      ltrace # library call monitoring
+      sysstat
+      ethtool
+      pciutils # lspci
+      usbutils # lsusb
+
+      # Yubikey & Friends
       yubikey-personalization
       yubico-piv-tool
       yubikey-personalization-gui
       yubikey-manager
-      pass
     ];
   };
 

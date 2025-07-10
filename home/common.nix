@@ -69,15 +69,7 @@
 
       # system utils
       btop # replacement of htop/nmon
-      iotop # io monitoring
-      iftop # network monitoring
-      strace # system call monitoring
-      ltrace # library call monitoring
       lsof # list open files
-      sysstat
-      ethtool
-      pciutils # lspci
-      usbutils # lsusb
       gron
 
       # Coding / dev tools
@@ -107,6 +99,10 @@
 
       # Add claude-code
       claude-code
+      
+      # GPG and password management (cross-platform)
+      gnupg
+      pass
     ];
   };
 

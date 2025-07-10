@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -8,12 +8,10 @@
     
     # macOS-specific packages
     packages = with pkgs; [
-      # Note: Some packages like 1Password, GPG tools may work differently on macOS
+      # Note: Some packages like 1Password may work differently on macOS
       # You might want to install 1Password via App Store or direct download
       # For now, including compatible versions
-      gnupg
       pinentry_mac
-      pass
     ];
   };
 
@@ -21,6 +19,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
+    enableScDaemon = true;
     pinentryPackage = pkgs.pinentry_mac;
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
