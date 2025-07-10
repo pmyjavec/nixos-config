@@ -29,10 +29,7 @@
       usbutils # lsusb
 
       # Yubikey & Friends
-      yubikey-personalization
-      yubico-piv-tool
       yubikey-personalization-gui
-      yubikey-manager
     ];
   };
 
