@@ -6,26 +6,75 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- Beautiful macOS styling
 config.audible_bell = 'Disabled'
 config.color_scheme = 'Tokyo Night Storm'
 config.enable_scroll_bar = false
 config.enable_wayland = false
 config.enable_tab_bar = true
-config.font = wezterm.font 'FiraCode Nerd Font Mono Ret'
-config.font_size = 9.0
-config.hide_mouse_cursor_when_typing = true
-config.inactive_pane_hsb = {
-  saturation = 0.6,
-  brightness = 0.8,
-}
-config.pane_focus_follows_mouse = true
-config.scrollback_lines = 20000
-config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.window_background_opacity = 1.0
-config.use_ime = false
-config.debug_key_events = true
+config.tab_bar_at_bottom = false
+config.show_new_tab_button_in_tab_bar = false
+config.show_tab_index_in_tab_bar = false
+config.tab_and_split_indices_are_zero_based = false
 
+-- Font configuration with better rendering
+config.font = wezterm.font_with_fallback({
+  'FiraCode Nerd Font Mono',
+  'Menlo',
+  'Monaco',
+  'SF Mono',
+})
+config.font_size = 14.0
+config.line_height = 1.2
+config.freetype_load_flags = 'NO_HINTING'
+config.freetype_render_target = 'HorizontalLcd'
+
+-- Window appearance
+config.window_decorations = 'RESIZE'
+config.window_background_opacity = 0.92
+config.macos_window_background_blur = 30
+config.text_background_opacity = 0.8
+config.initial_cols = 120
+config.initial_rows = 30
+
+-- Make window start at 80% of screen size
+wezterm.on('gui-startup', function()
+  local tab, pane, window = wezterm.mux.spawn_window{}
+  local gui_win = window:gui_window()
+  local screen = wezterm.gui.screens().active
+  gui_win:set_position(screen.width * 0.1, screen.height * 0.1)
+  gui_win:set_inner_size(screen.width * 0.8, screen.height * 0.8)
+end)
+config.window_padding = {
+  left = 20,
+  right = 20,
+  top = 20,
+  bottom = 20,
+}
+
+-- Cursor styling
+config.default_cursor_style = 'BlinkingBar'
+config.cursor_blink_rate = 500
+config.cursor_blink_ease_in = 'Constant'
+config.cursor_blink_ease_out = 'Constant'
+
+-- Behavior
+config.hide_mouse_cursor_when_typing = true
+config.pane_focus_follows_mouse = true
+config.scrollback_lines = 50000
+config.use_ime = false
+config.debug_key_events = false
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
+-- Inactive pane styling
+config.inactive_pane_hsb = {
+  saturation = 0.8,
+  brightness = 0.7,
+}
+
+-- Visual bell with smooth animation
 config.visual_bell = {
   fade_in_function = 'EaseIn',
   fade_in_duration_ms = 150,
@@ -33,12 +82,72 @@ config.visual_bell = {
   fade_out_duration_ms = 150,
 }
 
-
+-- Enhanced color palette
 config.colors = {
-  visual_bell = '#202020',
+  visual_bell = '#1a1b26',
+  foreground = '#c0caf5',
+  background = '#1a1b26',
+  
+  cursor_bg = '#c0caf5',
+  cursor_fg = '#1a1b26',
+  cursor_border = '#c0caf5',
+  
+  selection_fg = '#c0caf5',
+  selection_bg = '#33467C',
+  
+  scrollbar_thumb = '#292e42',
+  
+  split = '#565f89',
+  
+  ansi = {
+    '#15161e',
+    '#f7768e',
+    '#9ece6a',
+    '#e0af68',
+    '#7aa2f7',
+    '#bb9af7',
+    '#7dcfff',
+    '#a9b1d6',
+  },
+  
+  brights = {
+    '#414868',
+    '#f7768e',
+    '#9ece6a',
+    '#e0af68',
+    '#7aa2f7',
+    '#bb9af7',
+    '#7dcfff',
+    '#c0caf5',
+  },
+  
+  tab_bar = {
+    background = '#1a1b26',
+    active_tab = {
+      bg_color = '#7aa2f7',
+      fg_color = '#1a1b26',
+      intensity = 'Bold',
+    },
+    inactive_tab = {
+      bg_color = '#292e42',
+      fg_color = '#565f89',
+    },
+    inactive_tab_hover = {
+      bg_color = '#414868',
+      fg_color = '#c0caf5',
+    },
+    new_tab = {
+      bg_color = '#1a1b26',
+      fg_color = '#565f89',
+    },
+    new_tab_hover = {
+      bg_color = '#292e42',
+      fg_color = '#c0caf5',
+    },
+  },
 }
 
-config.term = 'wezterm'
+config.term = 'xterm-256color'
 
 -- Key bindings
 config.leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 8000 }
@@ -68,6 +177,9 @@ config.keys = {
 
   -- tmux style command palette
   { key = ':', mods = 'LEADER|SHIFT', action = act.ActivateCommandPalette },
+
+  -- Fullscreen toggle
+  { key = 'Enter', mods = 'CMD', action = act.ToggleFullScreen },
 
 
   {
