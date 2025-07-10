@@ -43,10 +43,6 @@
   };
 
 
-  # NOTE: There seems to be a bit of cross over between what is defined here
-  # and what is found in the home manager (home.nix), find out why and if that
-  # can be avoided...
-
   programs.zsh.enable = true;
   users.users.pmyjavec = {
     name = "pmyjavec";

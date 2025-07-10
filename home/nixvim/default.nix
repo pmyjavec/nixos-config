@@ -163,7 +163,8 @@
       leap.enable = false;
       lsp.enable = true;
       lsp.servers.gopls.enable = true;
-      lsp.servers.golangci-lint-ls.enable = true;
+      # Fixed: renamed from golangci-lint-ls to golangci_lint_ls
+      lsp.servers.golangci_lint_ls.enable = true;
       lsp.servers.marksman.enable = true;
       lsp.servers.pyright.enable = true;
       lsp.servers.terraformls.enable = true;
@@ -175,61 +176,68 @@
       neo-tree.enable = true;
       neoscroll.enable = true;
       noice.enable = true;
-      nvim-colorizer.enable = true;
+      # Fixed: renamed from nvim-colorizer to colorizer
+      colorizer.enable = true;
       tagbar.enable = true;
       toggleterm.enable = true;
       treesitter.enable = true;
-      surround.enable = true;
+      # Fixed: renamed from surround to vim-surround
+      vim-surround.enable = true;
       trouble.enable = true;
       twilight.enable = true;
       copilot-vim.enable = false;
+      # Fixed: explicitly enable web-devicons to avoid deprecation warning
+      web-devicons.enable = true;
       copilot-lua = {
         enable = true;
 
-        suggestion = {
-          enabled = false;
-          autoTrigger = false;
+        # Fixed: moved all settings under settings.*
+        settings = {
+          suggestion = {
+            enabled = false;
+            auto_trigger = false;  # Fixed: renamed from autoTrigger
 
-          keymap = {
-            accept = "<C-l>";
-            next = "<C-j>";
-            prev = "<C-k>";
-            dismiss = "<C-h>";
+            keymap = {
+              accept = "<C-l>";
+              next = "<C-j>";
+              prev = "<C-k>";
+              dismiss = "<C-h>";
+            };
           };
-        };
 
-        panel = {
-          enabled = false;
-          keymap = {
-            open = false;
-            accept = "<cr>";
-            jumpNext = "<C-j>";
-            jumpPrev = "<C-k>";
-            refresh = "<C-r>";
+          panel = {
+            enabled = false;
+            keymap = {
+              open = false;
+              accept = "<cr>";
+              jump_next = "<C-j>";  # Fixed: renamed from jumpNext
+              jump_prev = "<C-k>";  # Fixed: renamed from jumpPrev
+              refresh = "<C-r>";
+            };
           };
-        };
 
-        filetypes = {
-          javascript = true;
-          typescript = true;
-          css = true;
-          rust = true;
-          python = true;
-          java = true;
-          c = true;
-          cpp = true;
-          nix = true;
-          lua = true;
+          filetypes = {
+            javascript = true;
+            typescript = true;
+            css = true;
+            rust = true;
+            python = true;
+            java = true;
+            c = true;
+            cpp = true;
+            nix = true;
+            lua = true;
 
-          yaml = false;
-          markdown = false;
-          help = false;
-          gitcommit = false;
-          gitrebase = false;
-          hgcommit = false;
-          svn = false;
-          cvs = false;
-          "." = false;
+            yaml = false;
+            markdown = false;
+            help = false;
+            gitcommit = false;
+            gitrebase = false;
+            hgcommit = false;
+            svn = false;
+            cvs = false;
+            "." = false;
+          };
         };
       };
       cmp = {
@@ -284,16 +292,25 @@
 
       which-key = {
         enable = true;
-        registrations = {
-          "<Leader>f" = " Find";
-          "<Leader>t" = " Terminal";
-        };
-
-        plugins = {
-          registers = false;
-          spelling = {
-            enabled = true;
-            suggestions = 20;
+        # Fixed: replaced deprecated registrations with settings.spec
+        settings = {
+          spec = [
+            {
+              __unkeyed-1 = "<Leader>f";
+              group = " Find";
+            }
+            {
+              __unkeyed-1 = "<Leader>t";
+              group = " Terminal";
+            }
+          ];
+          
+          plugins = {
+            registers = false;
+            spelling = {
+              enabled = true;
+              suggestions = 20;
+            };
           };
         };
       };
