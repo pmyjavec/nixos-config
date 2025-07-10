@@ -32,4 +32,7 @@ vim.cmd([[
   hi Normal guibg=#1a1b26
   hi NormalFloat guibg=#1a1b26
   hi NormalNC guibg=#1a1b26
+  hi NeoTreeNormal guibg=#1a1b26
+  hi NeoTreeNormalNC guibg=#1a1b26
+  hi NeoTreeEndOfBuffer guibg=#1a1b26
 ]])

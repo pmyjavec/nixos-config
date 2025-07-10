@@ -150,6 +150,8 @@
         style = "storm";
         transparent = false;
         terminal_colors = true;
+        dim_inactive = true;
+        lualine_bold = true;
         styles = {
           comments = { italic = true; };
           keywords = { italic = true; };
@@ -158,6 +160,16 @@
           sidebars = "dark";
           floats = "dark";
         };
+        on_colors = ''
+          function(colors)
+            colors.bg = "#1a1b26"
+            colors.bg_dark = "#1a1b26"
+            colors.bg_float = "#1a1b26"
+            colors.bg_popup = "#1a1b26"
+            colors.bg_sidebar = "#1a1b26"
+            colors.bg_statusline = "#1a1b26"
+          end
+        '';
       };
     };
 
