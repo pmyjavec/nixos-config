@@ -26,3 +26,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.lsp.set_log_level("debug")
+
+-- Force proper background colors
+vim.cmd([[
+  hi Normal guibg=#1a1b26
+  hi NormalFloat guibg=#1a1b26
+  hi NormalNC guibg=#1a1b26
+]])
