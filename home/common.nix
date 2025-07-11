@@ -82,7 +82,6 @@
       jq # A lightweight and flexible command-line JSON processor
       eza
       tree-sitter
-      lazygit
       copier
 
       # CI/CD tools
@@ -151,6 +150,29 @@
         };
       }
     ];
+  };
+
+  # lazygit configuration
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = {
+        overrideGpg = true;
+      };
+      gui = {
+        theme = {
+          activeBorderColor = [ "#7aa2f7" "bold" ];
+          inactiveBorderColor = [ "#565f89" ];
+          optionsTextColor = [ "#7aa2f7" ];
+          selectedLineBgColor = [ "#283457" ];
+          selectedRangeBgColor = [ "#283457" ];
+          cherryPickedCommitBgColor = [ "#414868" ];
+          cherryPickedCommitFgColor = [ "#7aa2f7" ];
+          unstagedChangesColor = [ "#f7768e" ];
+          defaultFgColor = [ "#c0caf5" ];
+        };
+      };
+    };
   };
 
   # starship - an customizable prompt for any shell

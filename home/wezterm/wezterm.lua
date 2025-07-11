@@ -17,6 +17,12 @@ config.tab_bar_at_bottom = false
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
 config.tab_and_split_indices_are_zero_based = false
+config.tab_max_width = 32
+config.hide_tab_bar_if_only_one_tab = false
+config.window_frame = {
+  font = wezterm.font { family = 'FiraCode Nerd Font Mono', weight = 'Bold' },
+  font_size = 12.0,
+}
 
 -- Font configuration with better rendering
 config.font = wezterm.font_with_fallback({
@@ -31,7 +37,7 @@ config.freetype_load_flags = 'NO_HINTING'
 config.freetype_render_target = 'HorizontalLcd'
 
 -- Window appearance
-config.window_decorations = 'RESIZE'
+config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.window_background_opacity = 0.92
 config.macos_window_background_blur = 30
 config.text_background_opacity = 0.8
@@ -49,7 +55,7 @@ end)
 config.window_padding = {
   left = 20,
   right = 20,
-  top = 20,
+  top = 40,
   bottom = 20,
 }
 
@@ -129,16 +135,16 @@ config.colors = {
       intensity = 'Bold',
     },
     inactive_tab = {
-      bg_color = '#292e42',
-      fg_color = '#565f89',
+      bg_color = '#414868',
+      fg_color = '#c0caf5',
     },
     inactive_tab_hover = {
-      bg_color = '#414868',
+      bg_color = '#565f89',
       fg_color = '#c0caf5',
     },
     new_tab = {
       bg_color = '#1a1b26',
-      fg_color = '#565f89',
+      fg_color = '#c0caf5',
     },
     new_tab_hover = {
       bg_color = '#292e42',
@@ -310,5 +316,17 @@ function tab_title(tab_info)
   -- in that tab
   return tab_info.active_pane.title
 end
+
+-- Custom tab formatting with padding
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local title = tab_title(tab)
+  
+  -- Add padding to the tab title
+  local padded_title = '  ' .. title .. '  '
+  
+  return {
+    { Text = padded_title },
+  }
+end)
 
 return config
