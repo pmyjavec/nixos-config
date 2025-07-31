@@ -14,6 +14,8 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    onepassword-shell-plugins.url = "github:1Password/shell-plugins";
   };
 
   outputs =
@@ -22,6 +24,7 @@
     , nixpkgs-darwin
     , nixvim
     , home-manager
+    , onepassword-shell-plugins
     , ...
     }:
     let
@@ -56,8 +59,10 @@
       homeConfigurations = {
         pmyjavec = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs-darwin.legacyPackages.${system-darwin};
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             nixvim.homeManagerModules.nixvim
+            onepassword-shell-plugins.hmModules.default
             ./home/darwin.nix
           ];
         };

@@ -97,12 +97,19 @@
       kubelogin-oidc
       kubectx
 
+      # Docker tools
+      docker
+      docker-compose
+      docker-buildx
+      lazydocker
+
       # Add claude-code
       claude-code
       
       # GPG and password management (cross-platform)
       gnupg
       pass
+
       
       # YubiKey support (cross-platform)
       yubikey-manager
@@ -127,6 +134,11 @@
     delta = {
       enable = true;
     };
+
+    ignores = [
+      ".DS_Store"
+      ".claude"
+    ];
 
     extraConfig = {
       url = {
