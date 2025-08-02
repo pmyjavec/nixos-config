@@ -14,14 +14,20 @@
   home = {
     homeDirectory = "/Users/pmyjavec";
 
+    # macOS-specific session variables
+    sessionVariables = {
+      # aws-vault configuration for macOS
+      AWS_VAULT_BACKEND = "keychain";
+      AWS_VAULT_KEYCHAIN_NAME = "aws-vault";
+    };
+
     # macOS-specific packages
     packages = with pkgs; [
       # Note: Some packages like 1Password may work differently on macOS
       # You might want to install 1Password via App Store or direct download
       # For now, including compatible versions
       pinentry_mac
-      
-      # Docker Desktop (install manually from docker.com)
+
       # docker-desktop not available in nixpkgs
     ];
   };
@@ -34,11 +40,31 @@
     pinentry.package = pkgs.pinentry_mac;
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
+    defaultCacheTtlSsh = 31536000;
+    maxCacheTtlSsh = 31536000;
     extraConfig = ''
       allow-preset-passphrase
-      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-      card-timeout 86400
+      log-file /tmp/gpg-agent.log
+      verbose
+      debug-level guru
     '';
+  };
+
+  # GPG configuration for YubiKey - resolves CCID conflicts
+  programs.gpg = {
+    enable = true;
+    scdaemonSettings = {
+      disable-ccid = true;
+      log-file = "/tmp/scdaemon.log";
+      verbose = true;
+      debug-level = "guru";
+      debug-all = true;
+    };
+    settings = {
+      log-file = "/tmp/gpg.log";
+      verbose = true;
+      debug-level = "guru";
+    };
   };
 
   # macOS-specific configurations
@@ -56,14 +82,4 @@
       FXPreferredViewStyle = "clmv"; # Column view
     };
   };
-
-  # Configure aws-vault and keyring settings
-  home.sessionVariables = {
-    AWS_VAULT_KEYCHAIN_NAME = "login";
-    AWS_SESSION_TOKEN_TTL = "12h";
-    AWS_ASSUME_ROLE_TTL = "1h";
-    AWS_VAULT_BACKEND = "keychain";
-    GPG_TTY = "$(tty)";
-  };
-
 }
