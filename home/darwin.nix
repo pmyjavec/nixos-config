@@ -44,9 +44,6 @@
     maxCacheTtlSsh = 31536000;
     extraConfig = ''
       allow-preset-passphrase
-      log-file /tmp/gpg-agent.log
-      verbose
-      debug-level guru
     '';
   };
 
@@ -55,15 +52,8 @@
     enable = true;
     scdaemonSettings = {
       disable-ccid = true;
-      log-file = "/tmp/scdaemon.log";
-      verbose = true;
-      debug-level = "guru";
-      debug-all = true;
-    };
-    settings = {
-      log-file = "/tmp/gpg.log";
-      verbose = true;
-      debug-level = "guru";
+      # This might stop some extra prompting for my YK pin :shruggie...
+      disable-application = "piv";
     };
   };
 

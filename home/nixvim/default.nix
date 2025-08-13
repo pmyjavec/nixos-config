@@ -181,6 +181,7 @@
       diffview.enable = true;
       gitblame.enable = true;
       gitsigns.enable = true;
+      hardtime.enable = true;
       indent-blankline.enable = true;
       lazygit.enable = true;
       lastplace.enable = true;
@@ -328,7 +329,7 @@
               group = " Terminal";
             }
           ];
-          
+
           plugins = {
             registers = false;
             spelling = {

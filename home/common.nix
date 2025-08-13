@@ -23,12 +23,14 @@
       kx = "kubectx";
       v = "nvim";
       vim = "nvim";
+      lg = "${pkgs.lazygit}/bin/lazygit";
     };
 
     sessionVariables = {
       LANG = "en_US.UTF-8";
       LC_CTYPE = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
+
     };
 
     # Cross-platform packages only
@@ -89,6 +91,7 @@
       circleci-cli
 
       aws-vault
+      ssm-session-manager-plugin
 
       #Kubernetes
       k9s
@@ -105,12 +108,15 @@
 
       # Add claude-code
       claude-code
-      
+      gemini-cli
+      stripe-cli
+      oci-cli
+
       # GPG and password management (cross-platform)
       gnupg
       pass
 
-      
+
       # YubiKey support (cross-platform)
       yubikey-manager
       yubikey-personalization
@@ -206,6 +212,10 @@
     sessionVariables = {
       DEVBOX_NO_PROMPT = "true";
     };
+    initExtra = ''
+      # Source private aliases if they exist
+      [[ -f ~/.aliases ]] && source ~/.aliases
+    '';
     oh-my-zsh = {
       enable = true;
       plugins = [
