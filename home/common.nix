@@ -111,6 +111,7 @@
       gemini-cli
       stripe-cli
       oci-cli
+      awscli2
 
       # GPG and password management (cross-platform)
       gnupg
@@ -121,14 +122,15 @@
       yubikey-manager
       yubikey-personalization
       yubico-piv-tool
+
+      # Bruno, API explorer.
+      bruno
     ];
   };
 
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "Paul Myjavec";
-    userEmail = "pauly@myjavec.com";
 
     # gpg --list-secret-keys --keyid-format=long will give us the "key"
     # value.
@@ -137,16 +139,17 @@
       signByDefault = true;
     };
 
-    delta = {
-      enable = true;
-    };
-
     ignores = [
       ".DS_Store"
       ".claude"
     ];
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Paul Myjavec";
+        email = "pauly@myjavec.com";
+      };
+
       url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
@@ -168,6 +171,11 @@
         };
       }
     ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   # lazygit configuration
@@ -209,16 +217,20 @@
 
   programs.zsh = {
     enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     sessionVariables = {
       DEVBOX_NO_PROMPT = "true";
     };
-    initExtra = ''
+    initContent = ''
       # Source private aliases if they exist
       [[ -f ~/.aliases ]] && source ~/.aliases
     '';
     oh-my-zsh = {
       enable = true;
       plugins = [
+        "aws"
+        "history"
         "git"
         "sudo"
         "vi-mode"
@@ -264,6 +276,7 @@
 
   programs.ssh = {
     enable = true;
-    serverAliveInterval = 30;
+    enableDefaultConfig = false;
+    matchBlocks."*".serverAliveInterval = 30;
   };
 }

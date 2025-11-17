@@ -11,6 +11,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Override fish to skip failing tests on macOS
+  nixpkgs.overlays = [
+    (final: prev: {
+      fish = prev.fish.overrideAttrs (old: {
+        doCheck = false;
+      });
+    })
+  ];
+
   home = {
     homeDirectory = "/Users/pmyjavec";
 

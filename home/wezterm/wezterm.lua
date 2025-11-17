@@ -208,20 +208,16 @@ config.keys = {
   {
     key = '[',
     mods = 'LEADER',
-    action = act.Multiple {
-      --act.SendKey { key = 's', mods = 'CTRL' },
-      act.ActivateKeyTable {
-        name = 'copy_mode',
-        one_shot = false,
-      },
-    },
+    action = act.ActivateCopyMode,
   },
 }
 
 config.key_tables = {
   copy_mode = {
-    { key = 'k', action = act.ScrollByLine(-1) },
-    { key = 'j', action = act.ScrollByLine(1) },
+    { key = 'k', action = act.CopyMode 'MoveUp' },
+    { key = 'j', action = act.CopyMode 'MoveDown' },
+    { key = 'h', action = act.CopyMode 'MoveLeft' },
+    { key = 'l', action = act.CopyMode 'MoveRight' },
     { key = 's', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
     { key = 'u', mods = 'CTRL', action = act.ScrollByPage(-1) },
     { key = 'd', mods = 'CTRL', action = act.ScrollByPage(1) },
@@ -231,6 +227,15 @@ config.key_tables = {
     { key = 'UpArrow', mods = 'NONE', action = act.CopyMode 'PriorMatch' },
     { key = "/", mods = "NONE", action = act { Search = { CaseSensitiveString="" }}},
     { key = "?", mods = "SHIFT", action = { Search = { CaseSensitiveString = "" }}},
+    { key = 'v', action = act.CopyMode { SetSelectionMode = 'Cell' } },
+    { key = 'V', mods = 'SHIFT', action = act.CopyMode { SetSelectionMode = 'Line' } },
+    { key = 'y', action = act.Multiple {
+        { CopyTo = 'ClipboardAndPrimarySelection' },
+        act.CopyMode 'Close',
+        'PopKeyTable',
+        'ScrollToBottom',
+      },
+    },
     { key = 'Escape',
       action = act.Multiple {
         act.CopyMode 'Close',

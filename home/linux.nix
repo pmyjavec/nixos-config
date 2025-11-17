@@ -14,7 +14,7 @@
     
     # Linux-specific packages
     packages = with pkgs; [
-      _1password
+      _1password-cli
       xclip
       chromium
 

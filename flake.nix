@@ -46,7 +46,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ];
 
               home-manager.users.pmyjavec = import ./home/linux.nix;
@@ -61,7 +61,7 @@
           pkgs = nixpkgs-darwin.legacyPackages.${system-darwin};
           extraSpecialArgs = { inherit inputs; };
           modules = [
-            nixvim.homeManagerModules.nixvim
+            nixvim.homeModules.nixvim
             onepassword-shell-plugins.hmModules.default
             ./home/darwin.nix
           ];

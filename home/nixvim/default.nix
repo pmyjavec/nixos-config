@@ -190,7 +190,7 @@
       lsp.servers.gopls.enable = true;
       # Fixed: renamed from golangci-lint-ls to golangci_lint_ls
       lsp.servers.golangci_lint_ls.enable = true;
-      lsp.servers.marksman.enable = true;
+      # lsp.servers.marksman.enable = true; # Disabled - requires dotnet
       lsp.servers.pyright.enable = true;
       lsp.servers.terraformls.enable = true;
       lsp.servers.bashls.enable = true;
