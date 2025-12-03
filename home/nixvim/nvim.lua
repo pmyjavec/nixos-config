@@ -25,7 +25,16 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("error")
+
+-- Configure diagnostics display
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
 
 -- Force proper background colors
 vim.cmd([[

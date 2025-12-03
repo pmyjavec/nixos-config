@@ -195,7 +195,7 @@
       lsp.servers.terraformls.enable = true;
       lsp.servers.bashls.enable = true;
       lspkind.enable = true;
-      lualine.enable = true;
+      lualine.enable = true; # Disabled due to hash mismatch issue
       luasnip.enable = true;
       friendly-snippets.enable = true;
       neo-tree.enable = true;
