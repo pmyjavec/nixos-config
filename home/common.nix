@@ -125,6 +125,8 @@
 
       # Bruno, API explorer.
       bruno
+
+      jsonnet
     ];
   };
 
