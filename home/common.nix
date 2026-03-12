@@ -4,6 +4,7 @@
   imports = [
     ./nixvim
     ./wezterm
+    ./ghostty
   ];
 
   home = {
