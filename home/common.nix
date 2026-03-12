@@ -24,6 +24,7 @@
       v = "nvim";
       vim = "nvim";
       lg = "${pkgs.lazygit}/bin/lazygit";
+      rr = "cd \"$(git rev-parse --show-toplevel)\"";
     };
 
     sessionVariables = {
