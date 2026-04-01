@@ -177,9 +177,19 @@
       auto-save.enable = true;
       auto-session.enable = false;
       comment.enable = true;
-      conform-nvim.enable = true;
+      conform-nvim = {
+        enable = true;
+        settings = {
+          formatters_by_ft = {
+            python = [ "ruff_format" "ruff_fix" ];
+          };
+          format_on_save = {
+            timeout_ms = 2000;
+            lsp_fallback = true;
+          };
+        };
+      };
       diffview.enable = true;
-      gitblame.enable = true;
       gitsigns.enable = true;
       hardtime.enable = true;
       indent-blankline.enable = true;
