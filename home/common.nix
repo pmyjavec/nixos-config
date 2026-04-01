@@ -37,7 +37,6 @@
 
     # Cross-platform packages only
     packages = with pkgs; [
-      neofetch
       nnn
 
       # archives
@@ -111,6 +110,7 @@
       # Add claude-code
       claude-code
       gemini-cli
+      copilot-cli
       stripe-cli
       oci-cli
       awscli2
