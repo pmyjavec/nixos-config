@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    omp.url = "github:can1357/oh-my-pi";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";

@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs,... }:
 
 {
+
   imports = [
     ./nixvim
     ./wezterm
     ./ghostty
+    inputs.omp.homeManagerModules.default
   ];
 
   home = {
@@ -130,6 +132,11 @@
 
 
     ];
+  };
+
+  programs.omp = {
+    enable = true;
+    settings.startup.quiet = true;
   };
 
   # basic configuration of git, please change to your own
