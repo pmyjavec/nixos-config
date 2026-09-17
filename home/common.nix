@@ -5,6 +5,7 @@
     ./nixvim
     ./wezterm
     ./ghostty
+    ./omp
   ];
 
   home = {
@@ -69,7 +70,6 @@
 
       # fonts
       pkgs.nerd-fonts.fira-code
-      iosevka
 
       # system utils
       btop # replacement of htop/nmon
@@ -78,7 +78,6 @@
 
       # Coding / dev tools
       nodejs
-      devbox
 
       fzf
       ripgrep # recursively searches directories for a regex pattern
@@ -109,9 +108,6 @@
 
       # Add claude-code
       claude-code
-      gemini-cli
-      copilot-cli
-      stripe-cli
       oci-cli
       awscli2
 
@@ -129,6 +125,11 @@
       bruno
 
       jsonnet
+
+      vkquake
+
+
+
     ];
   };
 
@@ -281,6 +282,6 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks."*".serverAliveInterval = 30;
+    settings."*".ServerAliveInterval = 30;
   };
 }

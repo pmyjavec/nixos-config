@@ -9,6 +9,14 @@
     enable = true;
     defaultEditor = true;
 
+    # Reuse the host pkgs instead of letting nixvim import its own nixpkgs.
+    # flake.nix makes nixvim's `nixpkgs` input follow the root one, so
+    # without this, nixvim's default `nixpkgs.source` resolves to that
+    # followed (unpinned) revision and warns about the mismatch against
+    # its tested pin. Sharing `pkgs` also avoids a second nixpkgs
+    # evaluation and keeps overlays (e.g. the fish override below) applied.
+    nixpkgs.useGlobalPackages = true;
+
     # Install alpha as an extraPlugin because the
     # alpha plugin in 23.11 module doesn't let us set a theme.
     globals.mapleader = " ";
@@ -250,61 +258,8 @@
       vim-surround.enable = true;
       trouble.enable = true;
       twilight.enable = true;
-      copilot-vim.enable = false;
       # Fixed: explicitly enable web-devicons to avoid deprecation warning
       web-devicons.enable = true;
-      copilot-lua = {
-        enable = true;
-
-        # Fixed: moved all settings under settings.*
-        settings = {
-          suggestion = {
-            enabled = false;
-            auto_trigger = false;  # Fixed: renamed from autoTrigger
-
-            keymap = {
-              accept = "<C-l>";
-              next = "<C-j>";
-              prev = "<C-k>";
-              dismiss = "<C-h>";
-            };
-          };
-
-          panel = {
-            enabled = false;
-            keymap = {
-              open = false;
-              accept = "<cr>";
-              jump_next = "<C-j>";  # Fixed: renamed from jumpNext
-              jump_prev = "<C-k>";  # Fixed: renamed from jumpPrev
-              refresh = "<C-r>";
-            };
-          };
-
-          filetypes = {
-            javascript = true;
-            typescript = true;
-            css = true;
-            rust = true;
-            python = true;
-            java = true;
-            c = true;
-            cpp = true;
-            nix = true;
-            lua = true;
-
-            yaml = false;
-            markdown = false;
-            help = false;
-            gitcommit = false;
-            gitrebase = false;
-            hgcommit = false;
-            svn = false;
-            cvs = false;
-            "." = false;
-          };
-        };
-      };
       cmp = {
         enable = true;
         settings.sources =
@@ -314,7 +269,6 @@
             { name = "buffer"; }
             { name = "luasnip"; }
             { name = "cmdline"; }
-            { name = "copilot"; }
           ];
 
         settings.mapping = {
@@ -334,7 +288,6 @@
         '';
       };
       cmp-cmdline.enable = true;
-      copilot-cmp.enable = true;
       telescope = {
         enable = true;
         settings = {
