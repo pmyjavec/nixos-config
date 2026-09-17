@@ -5,7 +5,6 @@
     ./nixvim
     ./wezterm
     ./ghostty
-    ./omp
   ];
 
   home = {
