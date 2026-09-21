@@ -22,6 +22,7 @@
       cpra = "aws-vault exec cert-prod-admin --";
       ls = "eza";
       lr = "eza -lrt created";
+      ps = "procs";
       k = "kubectl";
       kx = "kubectx";
       v = "nvim";
@@ -76,6 +77,7 @@
       btop # replacement of htop/nmon
       lsof # list open files
       gron
+      procs # replacement of ps; identical output/flags on macOS and Linux
 
       # Coding / dev tools
       nodejs
