@@ -78,6 +78,7 @@
       lsof # list open files
       gron
       procs # replacement of ps; identical output/flags on macOS and Linux
+      bandwhich # live per-process network utilization; needs sudo to run
 
       # Coding / dev tools
       nodejs
