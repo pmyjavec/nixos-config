@@ -79,6 +79,8 @@
 
       # Coding / dev tools
       nodejs
+      herdr
+      devbox
 
       fzf
       ripgrep # recursively searches directories for a regex pattern
