@@ -245,7 +245,6 @@
         "git"
         "sudo"
         "vi-mode"
-        "z"
       ];
     };
   };
@@ -257,6 +256,12 @@
 
   # Direnv
   programs.direnv.enable = true;
+
+  # zoxide - smarter cd; `z <dir>` jumps to best match, `zi` opens a picker
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   # Find and manage installed fonts from packages.
   fonts.fontconfig.enable = true;
