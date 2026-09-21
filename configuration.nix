@@ -33,6 +33,9 @@
     options = "--delete-older-than 30d";
   };
 
+  # Hardlink identical store files to reclaim space.
+  nix.settings.auto-optimise-store = true;
+
   # Set the default editor to vim
   environment.variables.EDITOR = "neovim";
 
