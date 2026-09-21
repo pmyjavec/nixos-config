@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -19,6 +19,19 @@
       });
     })
   ];
+
+  # Weekly garbage collection of old home-manager generations (launchd agent).
+  # Only prunes this user's profiles; the daemon's own roots need `sudo nix-collect-garbage -d`.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+  # HM's launchd agent passes `options` as one argv element, which nix-collect-garbage
+  # rejects ("unrecognised flag '--delete-older-than 30d'"). Split it ourselves.
+  launchd.agents.nix-gc.config.ProgramArguments = lib.mkForce (
+    [ "${pkgs.nix}/bin/nix-collect-garbage" ] ++ lib.splitString " " config.nix.gc.options
+  );
 
   home = {
     homeDirectory = "/Users/pmyjavec";
