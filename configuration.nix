@@ -1,12 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  inputs.omp.url = "github:can1357/oh-my-pi";
-
   imports = [
     # Includenixpkgs the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.omp.homeManagerModules.default
   ];
 
   system.stateVersion = "23.11";
@@ -46,11 +43,6 @@
 
   environment.shellAliases = {
     vim = "nvim";
-  };
-
-  programs.omp = {
-    enable = true;
-    settings.startup.quiet = true;
   };
 
   programs.zsh.enable = true;

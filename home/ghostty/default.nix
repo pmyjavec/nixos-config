@@ -2,7 +2,9 @@
 {
   programs.ghostty = {
     enable = true;
-    package = null; # Ghostty is not available in nixpkgs on macOS
+    # Ghostty isn't packaged for macOS in nixpkgs (installed out of band);
+    # on Linux the HM module's systemd unit needs the real package.
+    package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.ghostty;
     enableZshIntegration = true;
     settings = {
       # Theme & Appearance

@@ -219,7 +219,26 @@
       lsp.servers.terraformls.enable = true;
       lsp.servers.bashls.enable = true;
       lspkind.enable = true;
-      lualine.enable = true; # Disabled due to hash mismatch issue
+      lualine = {
+        enable = true;
+        # cmdheight=0 leaves no row for the native "recording @x" message,
+        # so surface macro recording in the statusline instead. Remaining
+        # entries are lualine's lualine_x defaults.
+        settings.sections.lualine_x = [
+          {
+            __unkeyed-1.__raw = ''
+              function()
+                local reg = vim.fn.reg_recording()
+                return reg ~= "" and ("recording @" .. reg) or ""
+              end
+            '';
+            color.fg = "#ff9e64";
+          }
+          "encoding"
+          "fileformat"
+          "filetype"
+        ];
+      };
       luasnip.enable = true;
       friendly-snippets.enable = true;
       neo-tree.enable = true;

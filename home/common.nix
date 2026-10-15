@@ -1,4 +1,4 @@
-{ config, pkgs, inputs,... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
 
@@ -135,15 +135,72 @@
 
       vkquake
 
+      # lgit: LLM commit messages, routed through the local omp auth-gateway.
+      (pkgs.callPackage ../pkgs/lgit.nix { })
 
-
+      # opencommit (`oco`): same gateway via OCO_* session variables below.
+      (pkgs.callPackage ../pkgs/opencommit.nix { })
     ];
   };
 
   programs.omp = {
     enable = true;
-    settings.startup.quiet = true;
+    settings = {
+      startup.quiet = true;
+      modelRoles.default = "github-copilot/claude-fable-5.1";
+    };
   };
+
+  # ~/.opencommit stays unmanaged so `oco config set` still works.
+  # The gateway runs with --no-auth on loopback, so the API key is a dummy.
+  # Model ids are provider-prefixed as listed by GET /v1/models on the gateway.
+  home.sessionVariables = {
+    OMP_AUTH_BROKER_URL = "http://127.0.0.1:8765";
+    OCO_AI_PROVIDER = "openai";
+    OCO_API_URL = "http://127.0.0.1:4000/v1";
+    OCO_API_KEY = "omp-auth-gateway";
+    OCO_MODEL = "github-copilot/claude-haiku-4.5";
+    OCO_EMOJI = "false";
+  };
+
+  # omp auth-broker (credential vault, :8765) and auth-gateway (OpenAI-compatible
+  # proxy, :4000): launchd agents on macOS, systemd user units on Linux.
+  launchd.agents = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
+    lib.mapAttrs
+      (name: args: {
+        enable = true;
+        config = {
+          ProgramArguments = [ "${config.programs.omp.package}/bin/omp" ] ++ args;
+          EnvironmentVariables.OMP_AUTH_BROKER_URL = "http://127.0.0.1:8765";
+          KeepAlive = true;
+          RunAtLoad = true;
+          StandardOutPath = "${config.home.homeDirectory}/Library/Logs/${name}.log";
+          StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/${name}.err";
+        };
+      })
+      {
+        omp-auth-broker = [ "auth-broker" "serve" "--bind=127.0.0.1:8765" ];
+        omp-auth-gateway = [ "auth-gateway" "serve" "--bind=127.0.0.1:4000" "--no-auth" ];
+      }
+  );
+
+  systemd.user.services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+    lib.mapAttrs
+      (name: cmd: {
+        Unit.Description = name;
+        Service = {
+          ExecStart = "${config.programs.omp.package}/bin/omp ${cmd}";
+          Environment = [ "OMP_AUTH_BROKER_URL=http://127.0.0.1:8765" ];
+          Restart = "always";
+          RestartSec = 5;
+        };
+        Install.WantedBy = [ "default.target" ];
+      })
+      {
+        omp-auth-broker = "auth-broker serve --bind=127.0.0.1:8765";
+        omp-auth-gateway = "auth-gateway serve --bind=127.0.0.1:4000 --no-auth";
+      }
+  );
 
   # basic configuration of git, please change to your own
   programs.git = {

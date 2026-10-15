@@ -30,6 +30,13 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
+-- Repaint lualine's recording indicator immediately on q / q{reg}.
+vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+  callback = function()
+    vim.schedule(function() require('lualine').refresh({ place = { 'statusline' } }) end)
+  end,
+})
+
 vim.lsp.set_log_level("error")
 
 -- Configure diagnostics display
