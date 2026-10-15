@@ -79,6 +79,7 @@
       gron
       procs # replacement of ps; identical output/flags on macOS and Linux
       bandwhich # live per-process network utilization; needs sudo to run
+      process-compose
 
       # Coding / dev tools
       nodejs
@@ -241,6 +242,18 @@
     initContent = ''
       # Source private aliases if they exist
       [[ -f ~/.aliases ]] && source ~/.aliases
+
+      source ~/.config/shell/process-compose.sh
+
+      # devbox points HISTFILE at <project>/.devbox/shell_history (after
+      # sourcing this file), fragmenting history per project/worktree.
+      # Force global history from a precmd hook so it wins regardless of
+      # rc ordering.
+      _force_global_histfile() {
+        [[ "$HISTFILE" != "$HOME/.zsh_history" ]] && export HISTFILE="$HOME/.zsh_history"
+      }
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd _force_global_histfile
     '';
     oh-my-zsh = {
       enable = true;
@@ -254,7 +267,12 @@
     };
   };
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      source ~/.config/shell/process-compose.sh
+    '';
+  };
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -300,4 +318,43 @@
     enableDefaultConfig = false;
     settings."*".ServerAliveInterval = 30;
   };
+
+  # process-compose: a shared, consistent log location + rotation policy for
+  # every project, so logs don't end up scattered per-project. See
+  # https://f1bonacc1.github.io/process-compose/logging/
+  xdg.configFile."process-compose/logging.yaml".text = ''
+    log_location: "${config.home.homeDirectory}/.local/state/process-compose/pc.log"
+    log_configuration:
+      add_timestamp: true
+      timestamp_format: "2006-01-02T15:04:05Z07:00"
+      flush_each_line: true
+      rotation:
+        max_size_mb: 50
+        max_age_days: 14
+        max_backups: 5
+        compress: true
+  '';
+
+  # `-f`/`PC_CONFIG_FILES` fully replaces process-compose's default file
+  # discovery, so we can't just export an env var to inject the shared
+  # config above alongside a project's own file. Instead, wrap the CLI:
+  # always load the shared config, plus whichever of process-compose's
+  # own default filenames exist in the cwd.
+  xdg.configFile."shell/process-compose.sh".text = ''
+    pc() {
+      local files=("$HOME/.config/process-compose/logging.yaml")
+      local f
+      for f in process-compose.yml process-compose.yaml \
+               process-compose.override.yml process-compose.override.yaml; do
+        [[ -f "$f" ]] && files+=("$f")
+      done
+
+      local flags=()
+      for f in "''${files[@]}"; do
+        flags+=(-f "$f")
+      done
+
+      command process-compose "''${flags[@]}" "$@"
+    }
+  '';
 }
