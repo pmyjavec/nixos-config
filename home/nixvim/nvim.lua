@@ -1,3 +1,8 @@
+-- Native message/cmdline UI (nvim 0.12+, experimental): inline cmdline,
+-- message pager, no hit-enter prompts. Replaces what noice.nvim did
+-- without its macro-breaking ui_attach. pcall: internal API, may move.
+pcall(function() require('vim._core.ui2').enable() end)
+
 require('go').setup()
 require('nvim-web-devicons').setup()
 

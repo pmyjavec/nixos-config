@@ -23,7 +23,12 @@
 
     extraConfigLua = builtins.readFile ./nvim.lua;
 
-    extraPlugins = with pkgs.vimPlugins; [ go-nvim ];
+    extraPlugins = with pkgs.vimPlugins; [
+      go-nvim
+      # Centered floating cmdline on top of native ui2 (setup-less; needs
+      # cmdheight=0 and ui2 enabled — both done in opts / nvim.lua).
+      tiny-cmdline-nvim
+    ];
 
     keymaps = [
       {
@@ -148,6 +153,7 @@
       updatetime = 300; #length of time to wait before triggering the plugin
       #viewoptions = vim.tbl_filter(function(val) return val ~= "curdir" end, vim.opt.viewoptions:get())
       virtualedit = "block"; #allow going past end of line in visual block mode
+      winborder = "rounded"; #default border for floats (replaces noice lsp_doc_border)
       wrap = false; #disable wrapping of lines longer than the width of window
       writebackup = false; #disable making a backup before overwriting a file
     };
@@ -218,35 +224,16 @@
       friendly-snippets.enable = true;
       neo-tree.enable = true;
       neoscroll.enable = true;
-      noice = {
+      # noice removed: abandoned upstream (last release 2025-02, dormant
+      # since 2025-11) and its cmdline/messages UI broke macro recording
+      # (folke/noice.nvim#225, #877). nvim-notify covers notifications;
+      # `winborder` in opts covers float borders natively.
+      notify = {
         enable = true;
         settings = {
-          lsp = {
-            override = {
-              "vim.lsp.util.convert_input_to_markdown_lines" = true;
-              "vim.lsp.util.stylize_markdown" = true;
-              "cmp.entry.get_documentation" = true;
-            };
-          };
-          presets = {
-            bottom_search = true;
-            command_palette = true;
-            long_message_to_split = true;
-            inc_rename = false;
-            lsp_doc_border = false;
-          };
-          views = {
-            notify = {
-              position = {
-                row = 2;
-                col = "100%";
-              };
-              size = {
-                width = "auto";
-                height = "auto";
-              };
-            };
-          };
+          top_down = true;
+          render = "compact";
+          stages = "static";
         };
       };
       # Fixed: renamed from nvim-colorizer to colorizer
